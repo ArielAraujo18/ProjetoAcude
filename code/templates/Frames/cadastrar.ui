@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>cadastrar</class>
+ <widget class="QWidget" name="cadastrar">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,36 +18,296 @@
 	background: #0033A0;
 }</string>
   </property>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>20</y>
-     <width>191</width>
-     <height>61</height>
+     <x>10</x>
+     <y>110</y>
+     <width>311</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton {
-    background-color: #E0E7FF;
-    color: #0033A0;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
-    padding: 10px 22px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
 }
-QPushButton:hover {
-    background-color: #C7D2FE;
-}
-QPushButton:pressed {
-    background-color: #A5B4FC;
-}</string>
+</string>
    </property>
    <property name="text">
-    <string>MAPA</string>
+    <string>Coordenadas - latitude e longitude):</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>100</y>
+     <width>331</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>681</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 26px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>1. Informações Gerais sobre a Residência:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Logradouro:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>170</y>
+     <width>181</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>170</y>
+     <width>181</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>180</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Número:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_4">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>240</y>
+     <width>181</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>250</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Bairro:</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>290</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QRadioButton {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    spacing: 6px;
+}
+
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #CCCCCC;
+    background-color: transparent;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3B82F6;  /* Azul moderno e suave */
+    border: 1px solid #3B82F6;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Sim</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>240</y>
+     <width>241</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>A residência está habitada:</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radioButton_2">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>290</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QRadioButton {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    spacing: 6px;
+}
+
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #CCCCCC;
+    background-color: transparent;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3B82F6;  /* Azul moderno e suave */
+    border: 1px solid #3B82F6;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Não</string>
    </property>
   </widget>
  </widget>
