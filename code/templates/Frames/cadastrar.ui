@@ -18,7 +18,7 @@
 	background: #0033A0;
 }</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lbl_coordernadas">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -41,7 +41,7 @@
     <string>Coordenadas - latitude e longitude):</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="txt_coordenadas">
    <property name="geometry">
     <rect>
      <x>330</x>
@@ -65,8 +65,8 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>10</y>
+     <x>-30</x>
+     <y>20</y>
      <width>681</width>
      <height>41</height>
     </rect>
@@ -85,7 +85,7 @@
     <string>1. Informações Gerais sobre a Residência:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="lbl_log">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -108,7 +108,7 @@
     <string>Logradouro:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="txt_log">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -129,7 +129,7 @@
 </string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="txt_numero">
    <property name="geometry">
     <rect>
      <x>520</x>
@@ -150,7 +150,7 @@
 </string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="lbl_numero">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -173,7 +173,7 @@
     <string>Número:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="txt_bairro">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -194,7 +194,7 @@
 </string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="lbl_bairro">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -263,7 +263,7 @@
     <string>Número total de moradores na residência:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
+  <widget class="QLineEdit" name="txt_numeroMoradores">
    <property name="geometry">
     <rect>
      <x>370</x>
@@ -307,7 +307,7 @@
     <string>Se sim, quantas crianças?</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_6">
+  <widget class="QLineEdit" name="txt_quantidadeCrianca">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -365,7 +365,7 @@ r</string>
    <property name="title">
     <string>A residência está habitada?</string>
    </property>
-   <widget class="QRadioButton" name="radioButton_4">
+   <widget class="QRadioButton" name="radio_sim">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -400,7 +400,7 @@ QRadioButton::indicator:checked {
      <string>Sim</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="radio_nao">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -470,7 +470,7 @@ r</string>
    <property name="title">
     <string>Há crianças na residência?</string>
    </property>
-   <widget class="QRadioButton" name="radioButton_5">
+   <widget class="QRadioButton" name="radio_sim1">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -505,7 +505,7 @@ QRadioButton::indicator:checked {
      <string>Sim</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_6">
+   <widget class="QRadioButton" name="radio_nao2">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -541,7 +541,7 @@ QRadioButton::indicator:checked {
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="btn_continuar">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -570,7 +570,7 @@ QPushButton:pressed {
 }r</string>
    </property>
    <property name="text">
-    <string>Continuar cadastro</string>
+    <string>Cadastrar Moradores</string>
    </property>
   </widget>
  </widget>
