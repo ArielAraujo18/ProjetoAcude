@@ -217,47 +217,35 @@
     <string>Bairro:</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton">
+  <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>290</y>
-     <width>91</width>
-     <height>23</height>
+     <x>0</x>
+     <y>350</y>
+     <width>681</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QRadioButton {
+    <string notr="true">QLabel {
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 500;
-    spacing: 6px;
-}
-
-QRadioButton::indicator {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    border: 1px solid #CCCCCC;
-    background-color: transparent;
-}
-
-QRadioButton::indicator:checked {
-    background-color: #3B82F6;  /* Azul moderno e suave */
-    border: 1px solid #3B82F6;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
 }
 </string>
    </property>
    <property name="text">
-    <string>Sim</string>
+    <string>2. Composição Familiar</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>240</y>
-     <width>241</width>
+     <x>0</x>
+     <y>410</y>
+     <width>371</width>
      <height>41</height>
     </rect>
    </property>
@@ -272,20 +260,122 @@ QRadioButton::indicator:checked {
 </string>
    </property>
    <property name="text">
-    <string>A residência está habitada:</string>
+    <string>Número total de moradores na residência:</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton_2">
+  <widget class="QLineEdit" name="lineEdit_5">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>290</y>
-     <width>91</width>
-     <height>23</height>
+     <x>370</x>
+     <y>400</y>
+     <width>71</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QRadioButton {
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>490</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Se sim, quantas crianças?</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_6">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>480</y>
+     <width>61</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+    background-color: #FFFFFF;  
+    color: #1E1E1E;             
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 6px;
+}
+</string>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>240</y>
+     <width>261</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+    border: 2px solid #4DA8DA;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 8px;
+    color: #FFFFFF; 
+    font-size: 18px;
+    font-weight: 600;
+}
+r</string>
+   </property>
+   <property name="title">
+    <string>A residência está habitada?</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton {
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 500;
@@ -305,9 +395,182 @@ QRadioButton::indicator:checked {
     border: 1px solid #3B82F6;
 }
 </string>
+    </property>
+    <property name="text">
+     <string>Sim</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>40</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    spacing: 6px;
+}
+
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #CCCCCC;
+    background-color: transparent;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3B82F6;  /* Azul moderno e suave */
+    border: 1px solid #3B82F6;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Não</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>460</y>
+     <width>251</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QGroupBox {
+    border: 2px solid #4DA8DA;
+    border-radius: 8px;
+    margin-top: 20px;
+    padding: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: &quot;Segoe UI&quot;, sans-serif;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 8px;
+    color: #FFFFFF; 
+    font-size: 18px;
+    font-weight: 600;
+}
+r</string>
+   </property>
+   <property name="title">
+    <string>Há crianças na residência?</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    spacing: 6px;
+}
+
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #CCCCCC;
+    background-color: transparent;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3B82F6;  /* Azul moderno e suave */
+    border: 1px solid #3B82F6;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Sim</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_6">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>40</y>
+      <width>91</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QRadioButton {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    spacing: 6px;
+}
+
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+    border: 1px solid #CCCCCC;
+    background-color: transparent;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3B82F6;  /* Azul moderno e suave */
+    border: 1px solid #3B82F6;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Não</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>570</y>
+     <width>321</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #32CD32;
+}r</string>
    </property>
    <property name="text">
-    <string>Não</string>
+    <string>Continuar cadastro</string>
    </property>
   </widget>
  </widget>
