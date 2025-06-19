@@ -7,7 +7,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QMenuBar,
     QPushButton, QSizePolicy, QStatusBar, QWidget)
+from frm_Cadastro import Ui_frm_Cadastro
+import main
 
+import sys
 
 import geotecSfundo
 import prefeituraRodape
@@ -125,6 +128,32 @@ class Ui_frm_Principal(object):
         QMetaObject.connectSlotsByName(frm_Principal)
     # setupUi
 
+    def register(self):
+
+        if not hasattr(self, 'frm_Cadastro') or self.frm_Cadastro is None or not self.frm_Cadastro.isVisible():
+            self.frm_Cadastro = QWidget()
+            self.ui = Ui_frm_Cadastro()
+            self.ui.setupUi(self.frm_Cadastro)
+
+            self.frm_Cadastro.setAttribute(Qt.WA_DeleteOnClose)
+            self.frm_Cadastro.destroyed.connect(lambda: setattr(self, 'frm_Cadastro', None))
+
+            self.frm_Cadastro.show()        
+
+        else:
+        
+            self.frm_Cadastro.raise_()
+            self.frm_Cadastro.activateWindow()
+        
+    def abrir_cadastro(self):
+
+        self.app = QApplication
+        self.window = QMainWindow()
+        self.window.resize(800, 600)
+        self.window.show()
+
+
+
     def retranslateUi(self, frm_Principal):
         frm_Principal.setWindowTitle(QCoreApplication.translate("frm_Principal", u"Tela Principal", None))
         self.label.setText(QCoreApplication.translate("frm_Principal", u"SEGURAN\u00c7A DO A\u00c7UDE", None))
@@ -134,6 +163,9 @@ class Ui_frm_Principal(object):
         self.btn_cadastrar.setText(QCoreApplication.translate("frm_Principal", u"Cadastrar", None))
         self.label_3.setText("")
     # retranslateUi
+
+        self.btn_cadastrar.clicked.connect(self.register)
+        self.btn_cadastrar.clicked.connect(self.abrir_cadastro)
 
 if __name__ == "__main__":
     app = QApplication([])

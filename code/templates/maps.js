@@ -29,18 +29,6 @@ window.initMap = function () {
       map: map,
     });
 
-    //envia as coordenadas para o backend Flask via fetch
-    fetch('http://localhost:5000/coordenadas', {
-      method: 'POST',                            //método POST para enviar dados
-      headers: { 'Content-Type': 'application/json' }, //informando que é JSON
-      body: JSON.stringify({ lat: lat, lng: lng })     //convertendo coordenadas para texto JSON
-    })
-    .then(response => response.json())// espera resposta do Flask e converte para JSON
-    .then(data => {
-      console.log('Servidor respondeu:', data);// imprime a resposta no console
-    })
-    .catch(error => {
-      console.error('Erro ao enviar coordenadas:', error);// mostra erro caso ocorra
-    });
+    alert(`Latitude: ${lat}\nLongitude: ${lng}`);
   });
 };
