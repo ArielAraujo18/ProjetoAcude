@@ -145,14 +145,11 @@ class Ui_frm_Principal(object):
             self.frm_Cadastro.raise_()
             self.frm_Cadastro.activateWindow()
         
-    def abrir_cadastro(self):
-
+    def maps(self):
         self.app = QApplication
         self.window = QMainWindow()
         self.window.resize(800, 600)
         self.window.show()
-
-
 
     def retranslateUi(self, frm_Principal):
         frm_Principal.setWindowTitle(QCoreApplication.translate("frm_Principal", u"Tela Principal", None))
@@ -165,7 +162,8 @@ class Ui_frm_Principal(object):
     # retranslateUi
 
         self.btn_cadastrar.clicked.connect(self.register)
-        self.btn_cadastrar.clicked.connect(self.abrir_cadastro)
+        self.btn_cadastrar.clicked.connect(self.maps)
+        self.btn_visualizar.clicked.connect(self.maps)
 
 if __name__ == "__main__":
     app = QApplication([])
