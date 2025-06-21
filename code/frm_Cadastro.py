@@ -6,7 +6,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGroupBox, QLabel, QLineEdit,
-    QPushButton, QRadioButton, QSizePolicy, QWidget)
+    QPushButton, QRadioButton, QSizePolicy, QWidget, QMessageBox)
+
+import controle
+import mysql.connector
+import pandas
 
 class Ui_frm_Cadastro(object):
     def setupUi(self, frm_Cadastro):
@@ -465,6 +469,81 @@ class Ui_frm_Cadastro(object):
         QMetaObject.connectSlotsByName(frm_Cadastro)
     # setupUi
 
+    def register_home(self):
+        campos_inteiros = {
+            "Número": self.txt_numero.text().strip(),
+            "Número-Moradores": self.txt_numeroMoradores.text().strip(),
+            "Quantidade-de-Crianças": self.txt_quantidadeCrianca.text().strip(),
+        }
+        campos_texto = {
+            "Coordenadas": self.txt_coordenadas.text().strip(),
+            "Logradouro": self.txt_log.text().strip(),
+            "Bairro": self.txt_bairro_2.text().strip(),
+            "Habitada": "Sim" if self.radio_sim.isChecked() else "Não" if self.radio_nao.isChecked() else "",
+            "Crianças": self.radio_sim1_2.text().strip(),
+            "Crianças": self.radio_nao2_2.text().strip(),
+        }
+
+        for campo, preenchido in campos_inteiros.items():
+            if not preenchido.strip():
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"O campo '{campos_inteiros} é obrigatório, e não pode ficar vazio!' ")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                return
+        
+        for campo, preenchidos in campos_texto.items():
+            if not preenchido.strip():
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"O campo '{campos_texto} é obrigatório, e não pode ficar vazio!' ")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                return
+        
+        coordenadas = self.txt_coordenadas.text()
+        logradouro = self.txt_log.text()
+        numeroResidencial = self.txt_numero.text()
+        bairro = self.txt_bairro_2.text()
+        habitacao = "Sim" if self.radio_sim else "Não"
+        crianca = "Sim" if self.radio_sim1_2 else "Não"
+        numeroMoradores = self.txt_numeroMoradores.text()
+        quantidadeCrianca = self.txt_quantidadeCrianca.text()
+
+        mydb = mysql.connector.connect(
+            host = controle.host,
+            user = controle.user,
+            password = controle.password,
+            database = controle.database
+        )
+
+        mycursor = mydb.cursor()
+        sql = "INSERT INTO cadastroMorades(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+        valores = (
+                coordenadas,
+                logradouro,
+                numeroResidencial,
+                bairro,
+                habitacao,
+                numeroMoradores,
+                crianca,
+                quantidadeCrianca
+        )
+        mycursor.execute(sql, valores   )
+        mydb.commit()
+        print(mycursor.rowcount, 'Record(s) inserted')
+        mycursor.close()
+
+        print("ok")
+
+
     def retranslateUi(self, frm_Cadastro):
         frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro", None))
         self.lbl_bairro.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
@@ -491,6 +570,7 @@ class Ui_frm_Cadastro(object):
         self.radio_sim1_2.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
         self.radio_nao2_2.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00e3o", None))
     # retranslateUi
+        self.btn_continuar.clicked.connect(self.register_home)
 
 if __name__ == "__main__":
     app = QApplication([])
