@@ -1,4 +1,4 @@
 host = '127.0.0.1'
-user = 'root'
+user = 'Ariel'
 password = 'IRani18@#'
-database = 'SegurancaAcude' 
+database = 'SegurancaAcude'

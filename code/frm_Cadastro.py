@@ -9,14 +9,15 @@ from PySide6.QtWidgets import (QApplication, QGroupBox, QLabel, QLineEdit,
     QPushButton, QRadioButton, QSizePolicy, QWidget, QMessageBox)
 
 import controle
-import mysql.connector
+import pymysql
 import pandas
 
 class Ui_frm_Cadastro(object):
     def setupUi(self, frm_Cadastro):
         if not frm_Cadastro.objectName():
             frm_Cadastro.setObjectName(u"frm_Cadastro")
-        frm_Cadastro.resize(676, 676)
+        frm_Cadastro.setFixedSize(676, 676)
+        self.frm_Cadastro = frm_Cadastro
         frm_Cadastro.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -488,7 +489,7 @@ class Ui_frm_Cadastro(object):
             if not preenchido.strip():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRO!")
-                msg.setText(f"O campo '{campos_inteiros} é obrigatório, e não pode ficar vazio!' ")
+                msg.setText(f"O campo '{campo}' é obrigatório, e não pode ficar vazio! ")
                 icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
                 msg.setWindowIcon(QIcon(icon_path)) 
                 msg.setIcon(QMessageBox.Information)
@@ -500,7 +501,7 @@ class Ui_frm_Cadastro(object):
             if not preenchido.strip():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRO!")
-                msg.setText(f"O campo '{campos_texto} é obrigatório, e não pode ficar vazio!' ")
+                msg.setText(f"O campo '{campo} é obrigatório, e não pode ficar vazio!' ")
                 icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
                 msg.setWindowIcon(QIcon(icon_path)) 
                 msg.setIcon(QMessageBox.Information)
@@ -512,20 +513,20 @@ class Ui_frm_Cadastro(object):
         logradouro = self.txt_log.text()
         numeroResidencial = self.txt_numero.text()
         bairro = self.txt_bairro_2.text()
-        habitacao = "Sim" if self.radio_sim else "Não"
-        crianca = "Sim" if self.radio_sim1_2 else "Não"
+        habitacao = "Sim" if self.radio_sim.isChecked() else "Não"
+        crianca = "Sim" if self.radio_sim1_2.isChecked() else "Não"
         numeroMoradores = self.txt_numeroMoradores.text()
         quantidadeCrianca = self.txt_quantidadeCrianca.text()
 
-        mydb = mysql.connector.connect(
-            host = controle.host,
-            user = controle.user,
-            password = controle.password,
-            database = controle.database
+        mydb = pymysql.connect(
+                host = 'localhost',
+                user = 'Ariel',
+                password = 'IRani18@#',
+                database = 'SegurancaAcude'
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroMorades(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
         valores = (
                 coordenadas,
                 logradouro,
@@ -541,8 +542,7 @@ class Ui_frm_Cadastro(object):
         print(mycursor.rowcount, 'Record(s) inserted')
         mycursor.close()
 
-        print("ok")
-
+        self.frm_Cadastro.close
 
     def retranslateUi(self, frm_Cadastro):
         frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro", None))
