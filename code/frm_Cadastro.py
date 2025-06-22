@@ -519,10 +519,10 @@ class Ui_frm_Cadastro(object):
         quantidadeCrianca = self.txt_quantidadeCrianca.text()
 
         mydb = pymysql.connect(
-                host = 'localhost',
-                user = 'Ariel',
-                password = 'IRani18@#',
-                database = 'SegurancaAcude'
+                host = controle.host,
+                user = controle.user,
+                password = controle.password,
+                database = controle.database
         )
 
         mycursor = mydb.cursor()
@@ -542,7 +542,7 @@ class Ui_frm_Cadastro(object):
         print(mycursor.rowcount, 'Record(s) inserted')
         mycursor.close()
 
-        self.frm_Cadastro.close
+        self.frm_Cadastro.close()
 
     def retranslateUi(self, frm_Cadastro):
         frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro", None))

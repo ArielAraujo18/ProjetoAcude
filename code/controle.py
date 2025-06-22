@@ -1,4 +1,6 @@
-host = '127.0.0.1'
+host = 'localhost'
 user = 'Ariel'
 password = 'IRani18@#'
 database = 'SegurancaAcude'
+
+coordenadas = 0
