@@ -23,7 +23,7 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>521</width>
+     <width>1061</width>
      <height>41</height>
     </rect>
    </property>
@@ -606,9 +606,9 @@ QComboBox QAbstractItemView {
   <widget class="QPushButton" name="btn_cadastrarM">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>490</y>
-     <width>301</width>
+     <x>660</x>
+     <y>500</y>
+     <width>300</width>
      <height>61</height>
     </rect>
    </property>
@@ -920,9 +920,9 @@ QComboBox QAbstractItemView {
    <property name="geometry">
     <rect>
      <x>510</x>
-     <y>0</y>
+     <y>60</y>
      <width>20</width>
-     <height>701</height>
+     <height>641</height>
     </rect>
    </property>
    <property name="orientation">
@@ -947,7 +947,7 @@ QComboBox QAbstractItemView {
     <rect>
      <x>630</x>
      <y>580</y>
-     <width>351</width>
+     <width>350</width>
      <height>61</height>
     </rect>
    </property>
@@ -972,6 +972,19 @@ QPushButton:pressed {
    </property>
    <property name="text">
     <string>Finalizar cadastro de moradores</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>-3</x>
+     <y>60</y>
+     <width>1061</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
  </widget>

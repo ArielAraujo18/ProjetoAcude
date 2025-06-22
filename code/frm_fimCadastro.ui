@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Frm_fimCadastro</class>
- <widget class="QWidget" name="Frm_fimCadastro">
+ <class>frm_fimCadastro</class>
+ <widget class="QWidget" name="frm_fimCadastro">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>676</width>
-    <height>721</height>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,7 +88,7 @@
   <widget class="QPushButton" name="btn_continuar">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>160</x>
      <y>640</y>
      <width>351</width>
      <height>61</height>
@@ -334,7 +334,7 @@ QRadioButton::indicator:checked {
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>430</y>
      <width>481</width>
      <height>80</height>
@@ -363,7 +363,7 @@ QGroupBox::title {
 r</string>
    </property>
    <property name="title">
-    <string>Os moradores têm acesso à internet na residência?</string>
+    <string>Os moradores têm acesso à internet na residência?</string>
    </property>
    <widget class="QRadioButton" name="radio_sim_3">
     <property name="geometry">
@@ -439,7 +439,7 @@ QRadioButton::indicator:checked {
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>530</y>
      <width>261</width>
      <height>80</height>
@@ -544,7 +544,7 @@ QRadioButton::indicator:checked {
   <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>310</x>
      <y>530</y>
      <width>311</width>
      <height>80</height>

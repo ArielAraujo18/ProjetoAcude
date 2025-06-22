@@ -470,7 +470,7 @@ class Ui_frm_Cadastro(object):
         QMetaObject.connectSlotsByName(frm_Cadastro)
     # setupUi
 
-    def register_home(self):
+    def registrando(self):
         campos_inteiros = {
             "Número": self.txt_numero.text().strip(),
             "Número-Moradores": self.txt_numeroMoradores.text().strip(),
@@ -541,9 +541,34 @@ class Ui_frm_Cadastro(object):
         mydb.commit()
         print(mycursor.rowcount, 'Record(s) inserted')
         mycursor.close()
+        
+        controle.finalizado = 'true'
 
         self.frm_Cadastro.close()
 
+    def continuando(self):
+        
+        if controle.finalizado == 'true':
+                from frm_Moradores import Ui_frm_Moradores
+
+                if not hasattr(self, 'frm_Moradores') or self.frm_Moradores is None or not self.frm_Moradores.isVisible():
+                        self.frm_Moradores = QWidget()
+                        self.ui = Ui_frm_Moradores()
+                        self.ui.setupUi(self.frm_Moradores)
+
+                        self.frm_Moradores.setAttribute(Qt.WA_DeleteOnClose)
+                        self.frm_Moradores.destroyed.connect(lambda: setattr(self, 'frm_Moradores', None))
+
+                        self.frm_Moradores.show()        
+
+                else:
+                
+                        self.frm_Moradores.raise_()
+                        self.frm_Moradores.activateWindow()
+        
+        else:
+                print('Não finalizou')
+        
     def retranslateUi(self, frm_Cadastro):
         frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro", None))
         self.lbl_bairro.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
@@ -570,7 +595,8 @@ class Ui_frm_Cadastro(object):
         self.radio_sim1_2.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
         self.radio_nao2_2.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00e3o", None))
     # retranslateUi
-        self.btn_continuar.clicked.connect(self.register_home)
+        self.btn_continuar.clicked.connect(self.registrando)
+        self.btn_continuar.clicked.connect(self.continuando)
 
 if __name__ == "__main__":
     app = QApplication([])
