@@ -517,6 +517,9 @@ class Ui_frm_Cadastro(object):
         crianca = "Sim" if self.radio_sim1_2.isChecked() else "Não"
         numeroMoradores = self.txt_numeroMoradores.text()
         quantidadeCrianca = self.txt_quantidadeCrianca.text()
+        
+        controle.coordenadas = coordenadas
+        print(controle.coordenadas)
 
         mydb = pymysql.connect(
                 host = controle.host,
@@ -570,7 +573,7 @@ class Ui_frm_Cadastro(object):
                 print('Não finalizou')
         
     def retranslateUi(self, frm_Cadastro):
-        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro", None))
+        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro de residência", None))
         self.lbl_bairro.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
         self.label_6.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00famero total de moradores na resid\u00eancia:", None))
         self.lbl_coordernadas.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas - latitude e longitude):", None))

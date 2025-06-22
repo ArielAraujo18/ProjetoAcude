@@ -154,6 +154,7 @@ class Ui_frm_Moradores(object):
 "    border-radius: 6px;\n"
 "    padding: 5px 10px;\n"
 "    font-size: 14px;\n"
+"	color: #000000;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -253,6 +254,7 @@ class Ui_frm_Moradores(object):
 "    border-radius: 6px;\n"
 "    padding: 5px 10px;\n"
 "    font-size: 14px;\n"
+"	color: #000000;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -372,7 +374,7 @@ class Ui_frm_Moradores(object):
 "")
         self.lbl_coordernadas_15 = QLabel(frm_Moradores)
         self.lbl_coordernadas_15.setObjectName(u"lbl_coordernadas_15")
-        self.lbl_coordernadas_15.setGeometry(QRect(560, 270, 161, 41))
+        self.lbl_coordernadas_15.setGeometry(QRect(550, 270, 161, 41))
         self.lbl_coordernadas_15.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -383,7 +385,7 @@ class Ui_frm_Moradores(object):
 "")
         self.txt_contato2 = QLineEdit(frm_Moradores)
         self.txt_contato2.setObjectName(u"txt_contato2")
-        self.txt_contato2.setGeometry(QRect(730, 260, 261, 51))
+        self.txt_contato2.setGeometry(QRect(720, 260, 261, 51))
         self.txt_contato2.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -429,6 +431,7 @@ class Ui_frm_Moradores(object):
 "    border-radius: 6px;\n"
 "    padding: 5px 10px;\n"
 "    font-size: 14px;\n"
+"	color: #000000;\n"
 "}\n"
 "\n"
 "QComboBox::drop-down {\n"
@@ -449,7 +452,7 @@ class Ui_frm_Moradores(object):
 "")
         self.txt_Nome_2 = QLineEdit(frm_Moradores)
         self.txt_Nome_2.setObjectName(u"txt_Nome_2")
-        self.txt_Nome_2.setGeometry(QRect(710, 120, 331, 51))
+        self.txt_Nome_2.setGeometry(QRect(690, 120, 331, 51))
         self.txt_Nome_2.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -473,7 +476,7 @@ class Ui_frm_Moradores(object):
 "")
         self.lbl_coordernadas_16 = QLabel(frm_Moradores)
         self.lbl_coordernadas_16.setObjectName(u"lbl_coordernadas_16")
-        self.lbl_coordernadas_16.setGeometry(QRect(560, 130, 151, 41))
+        self.lbl_coordernadas_16.setGeometry(QRect(540, 130, 151, 41))
         self.lbl_coordernadas_16.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
