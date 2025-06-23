@@ -555,19 +555,49 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
         
-        """
+        
         nome1 = self.txt_Nome1.text()
         idade1 = self.txt_idade1.text()
         email1 = self.txt_email1.text()
         contato1 = self.txt_contato1.text()
         genero1 = self.comboBox_2.itemText()
-        
+
+        campos1 = [nome1, idade1, email1, contato1, genero1]
+
+        preenchidos1 = [campos1 for campo in campos1 if campo]
+
+        if 0 < len(preenchidos1) < len(campos1):
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Preencha todos os campos de morador 2")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                return
+
+
         nome2 = self.txt_Nome_2.text()
         idade2 = self.txt_idade2.text()
         email2 = self.txt_email2.text()
         contato2 = self.txt_contato2.text()
         genero2 = self.comboBox_2.itemText()
-        """
+
+        campos2 = [nome2, idade2, email2, contato2, genero2]
+
+        prenchidos = [campos2 for campo in campos2 if campo]
+
+        if 0 < len(preenchidos1) < len(campos2):
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Preencha todos os campos de morador 3")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                return
 
 
     def retranslateUi(self, frm_Moradores):

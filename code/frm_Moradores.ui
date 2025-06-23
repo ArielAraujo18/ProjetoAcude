@@ -304,6 +304,11 @@ QComboBox QAbstractItemView {
    </property>
    <item>
     <property name="text">
+     <string/>
+    </property>
+   </item>
+   <item>
+    <property name="text">
      <string>Masculino</string>
     </property>
    </item>
@@ -493,6 +498,11 @@ QComboBox QAbstractItemView {
 }
 </string>
    </property>
+   <item>
+    <property name="text">
+     <string/>
+    </property>
+   </item>
    <item>
     <property name="text">
      <string>Masculino</string>
@@ -833,6 +843,11 @@ QComboBox QAbstractItemView {
 }
 </string>
    </property>
+   <item>
+    <property name="text">
+     <string/>
+    </property>
+   </item>
    <item>
     <property name="text">
      <string>Masculino</string>
