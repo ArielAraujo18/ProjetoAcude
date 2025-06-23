@@ -529,7 +529,7 @@ class Ui_frm_Cadastro(object):
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
         valores = (
                 coordenadas,
                 logradouro,

@@ -6,13 +6,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QWidget)
+    QLineEdit, QPushButton, QSizePolicy, QWidget, QMessageBox)
+
+import pymysql
+import pandas as pd
+import controle
 
 class Ui_frm_Moradores(object):
     def setupUi(self, frm_Moradores):
         if not frm_Moradores.objectName():
             frm_Moradores.setObjectName(u"frm_Moradores")
-        frm_Moradores.resize(1061, 708)
+        frm_Moradores.setFixedSize(1061, 708)
+        self.frm_Moradores = frm_Moradores
         frm_Moradores.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -526,8 +531,47 @@ class Ui_frm_Moradores(object):
         QMetaObject.connectSlotsByName(frm_Moradores)
     # setupUi
 
+    def cadastroMoradores(self):
+
+        nome = self.txt_Nome.text().strip()
+        idade = self.txt_idade.text().strip()
+        email = self.txt_email.text().strip()
+        contato = self.txt_Contato.text().strip()
+        genero = self.comboBox.currentText().strip()
+
+        campos = [nome, idade, email, contato, genero]
+
+        #adiciona a lista cada campo preenchido em campos
+        prenchidos = [campo for campo in campos if campo]
+
+        if 0 < len(prenchidos) < len(campos):
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Preencha todos os campos de morador 1")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                return
+        
+        """
+        nome1 = self.txt_Nome1.text()
+        idade1 = self.txt_idade1.text()
+        email1 = self.txt_email1.text()
+        contato1 = self.txt_contato1.text()
+        genero1 = self.comboBox_2.itemText()
+        
+        nome2 = self.txt_Nome_2.text()
+        idade2 = self.txt_idade2.text()
+        email2 = self.txt_email2.text()
+        contato2 = self.txt_contato2.text()
+        genero2 = self.comboBox_2.itemText()
+        """
+
+
     def retranslateUi(self, frm_Moradores):
-        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Form", None))
+        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Cadastro Moradores", None))
         self.label_9.setText(QCoreApplication.translate("frm_Moradores", u"2. Moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_10.setText(QCoreApplication.translate("frm_Moradores", u"Morador 1 (Respons\u00e1vel):", None))
@@ -568,6 +612,7 @@ class Ui_frm_Moradores(object):
         self.lbl_coordernadas_16.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.btn_Finalizar.setText(QCoreApplication.translate("frm_Moradores", u"Finalizar cadastro de moradores", None))
     # retranslateUi
+        self.btn_cadastrarM.clicked.connect(self.cadastroMoradores)
 
 if __name__ == "__main__":
     app = QApplication([])
