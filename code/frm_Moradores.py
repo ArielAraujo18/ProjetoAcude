@@ -8,16 +8,16 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QWidget, QMessageBox)
 
-import pymysql
-import pandas as pd
+import pandas as pd 
 import controle
+import pymysql
+
 
 class Ui_frm_Moradores(object):
     def setupUi(self, frm_Moradores):
         if not frm_Moradores.objectName():
             frm_Moradores.setObjectName(u"frm_Moradores")
-        frm_Moradores.setFixedSize(1061, 708)
-        self.frm_Moradores = frm_Moradores
+        frm_Moradores.resize(1061, 708)
         frm_Moradores.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -151,6 +151,7 @@ class Ui_frm_Moradores(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(120, 330, 261, 41))
         self.comboBox.setStyleSheet(u"QComboBox {\n"
@@ -247,6 +248,7 @@ class Ui_frm_Moradores(object):
 "}\n"
 "")
         self.comboBox_2 = QComboBox(frm_Moradores)
+        self.comboBox_2.addItem("")
         self.comboBox_2.addItem("")
         self.comboBox_2.addItem("")
         self.comboBox_2.addItem("")
@@ -428,6 +430,7 @@ class Ui_frm_Moradores(object):
         self.comboBox_3.addItem("")
         self.comboBox_3.addItem("")
         self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
         self.comboBox_3.setObjectName(u"comboBox_3")
         self.comboBox_3.setGeometry(QRect(660, 330, 261, 41))
         self.comboBox_3.setStyleSheet(u"QComboBox {\n"
@@ -536,15 +539,15 @@ class Ui_frm_Moradores(object):
         nome = self.txt_Nome.text().strip()
         idade = self.txt_idade.text().strip()
         email = self.txt_email.text().strip()
-        contato = self.txt_Contato.text().strip()
+        contato = self.txt_Contato.text().replace('(', '').replace(')', '').replace('-', '').strip()
         genero = self.comboBox.currentText().strip()
 
         campos = [nome, idade, email, contato, genero]
 
         #adiciona a lista cada campo preenchido em campos
-        prenchidos = [campo for campo in campos if campo]
+        preenchidos = [campo for campo in campos if campo]
 
-        if 0 < len(prenchidos) < len(campos):
+        if 0 < len(preenchidos) < len(campos):
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRO!")
                 msg.setText(f"Preencha todos os campos de morador 1")
@@ -555,12 +558,11 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
         
-        
-        nome1 = self.txt_Nome1.text()
-        idade1 = self.txt_idade1.text()
-        email1 = self.txt_email1.text()
-        contato1 = self.txt_contato1.text()
-        genero1 = self.comboBox_2.itemText()
+        nome1 = self.txt_Nome1.text().strip()
+        idade1 = self.txt_idade1.text().strip()
+        email1 = self.txt_email1.text().strip()
+        contato1 = self.txt_contato1.text().replace('(', '').replace(')', '').replace('-', '').strip()
+        genero1 = self.comboBox_2.currentText().strip()
 
         campos1 = [nome1, idade1, email1, contato1, genero1]
 
@@ -577,12 +579,11 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
 
-
-        nome2 = self.txt_Nome_2.text()
-        idade2 = self.txt_idade2.text()
-        email2 = self.txt_email2.text()
-        contato2 = self.txt_contato2.text()
-        genero2 = self.comboBox_2.itemText()
+        nome2 = self.txt_Nome_2.text().strip()
+        idade2 = self.txt_idade2.text().strip()
+        email2 = self.txt_email2.text().strip()
+        contato2 = self.txt_contato2.text().replace('(', '').replace(')', '').replace('-', '').strip()
+        genero2 = self.comboBox_2.currentText().strip()
 
         campos2 = [nome2, idade2, email2, contato2, genero2]
 
@@ -598,10 +599,12 @@ class Ui_frm_Moradores(object):
                 msg.setStandardButtons(QMessageBox.Ok)
                 msg.exec()
                 return
+        
+        
 
 
     def retranslateUi(self, frm_Moradores):
-        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Cadastro Moradores", None))
+        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Form", None))
         self.label_9.setText(QCoreApplication.translate("frm_Moradores", u"2. Moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_10.setText(QCoreApplication.translate("frm_Moradores", u"Morador 1 (Respons\u00e1vel):", None))
@@ -610,19 +613,21 @@ class Ui_frm_Moradores(object):
         self.lbl_coordernadas_5.setText(QCoreApplication.translate("frm_Moradores", u"Telefone(contato):", None))
         self.txt_Contato.setInputMask(QCoreApplication.translate("frm_Moradores", u"(00) 0 0000-0000", None))
         self.lbl_coordernadas_6.setText(QCoreApplication.translate("frm_Moradores", u"G\u00eanero:", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
-        self.comboBox.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Outro", None))
+        self.comboBox.setItemText(0, "")
+        self.comboBox.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
+        self.comboBox.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
+        self.comboBox.setItemText(4, QCoreApplication.translate("frm_Moradores", u"Outro", None))
 
         self.lbl_coordernadas_7.setText(QCoreApplication.translate("frm_Moradores", u"G\u00eanero:", None))
         self.lbl_coordernadas_8.setText(QCoreApplication.translate("frm_Moradores", u"E-mail:", None))
         self.lbl_coordernadas_9.setText(QCoreApplication.translate("frm_Moradores", u"Idade:", None))
         self.lbl_coordernadas_10.setText(QCoreApplication.translate("frm_Moradores", u"Telefone(contato):", None))
-        self.comboBox_2.setItemText(0, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
-        self.comboBox_2.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
-        self.comboBox_2.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
-        self.comboBox_2.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Outro", None))
+        self.comboBox_2.setItemText(0, "")
+        self.comboBox_2.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
+        self.comboBox_2.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
+        self.comboBox_2.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
+        self.comboBox_2.setItemText(4, QCoreApplication.translate("frm_Moradores", u"Outro", None))
 
         self.lbl_coordernadas_11.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_11.setText(QCoreApplication.translate("frm_Moradores", u"Morador 2:", None))
@@ -634,10 +639,11 @@ class Ui_frm_Moradores(object):
         self.lbl_coordernadas_15.setText(QCoreApplication.translate("frm_Moradores", u"Telefone(contato):", None))
         self.txt_contato2.setInputMask(QCoreApplication.translate("frm_Moradores", u"(00) 0 0000-0000", None))
         self.label_12.setText(QCoreApplication.translate("frm_Moradores", u"Morador 3:", None))
-        self.comboBox_3.setItemText(0, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
-        self.comboBox_3.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
-        self.comboBox_3.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
-        self.comboBox_3.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Outro", None))
+        self.comboBox_3.setItemText(0, "")
+        self.comboBox_3.setItemText(1, QCoreApplication.translate("frm_Moradores", u"Masculino", None))
+        self.comboBox_3.setItemText(2, QCoreApplication.translate("frm_Moradores", u"Feminino", None))
+        self.comboBox_3.setItemText(3, QCoreApplication.translate("frm_Moradores", u"Prefiro n\u00e3o responder", None))
+        self.comboBox_3.setItemText(4, QCoreApplication.translate("frm_Moradores", u"Outro", None))
 
         self.lbl_coordernadas_16.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.btn_Finalizar.setText(QCoreApplication.translate("frm_Moradores", u"Finalizar cadastro de moradores", None))
@@ -651,3 +657,4 @@ if __name__ == "__main__":
     ui.setupUi(frm_Moradores)
     frm_Moradores.show()
     app.exec()  
+
