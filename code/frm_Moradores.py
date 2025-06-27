@@ -17,7 +17,7 @@ class Ui_frm_Moradores(object):
     def setupUi(self, frm_Moradores):
         if not frm_Moradores.objectName():
             frm_Moradores.setObjectName(u"frm_Moradores")
-        frm_Moradores.resize(1061, 708)
+        frm_Moradores.setFixedSize(1061, 708)
         frm_Moradores.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -536,6 +536,8 @@ class Ui_frm_Moradores(object):
 
     def cadastroMoradores(self):
 
+        from controle import coordenadas
+
         nome = self.txt_Nome.text().strip()
         idade = self.txt_idade.text().strip()
         email = self.txt_email.text().strip()
@@ -600,7 +602,17 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
         
-        
+        if campos:
+                mydb = pymysql.connect(
+                        host = controle.host,
+                        user = controle.user,
+                        password = controle.password,
+                        database = controle.database
+                )
+
+                mycursor = mydb.cursor()
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                
 
 
     def retranslateUi(self, frm_Moradores):

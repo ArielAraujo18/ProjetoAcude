@@ -144,6 +144,7 @@ class Ui_frm_Principal(object):
         
             self.frm_Cadastro.raise_()
             self.frm_Cadastro.activateWindow()
+
         
     def maps(self):
         self.app = QApplication
