@@ -13,7 +13,7 @@ class Ui_frm_fimCadastro(object):
     def setupUi(self, frm_fimCadastro):
         if not frm_fimCadastro.objectName():
             frm_fimCadastro.setObjectName(u"frm_fimCadastro")
-        frm_fimCadastro.resize(676, 733)
+        frm_fimCadastro.setFixedSize(676, 733)
         frm_fimCadastro.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -402,8 +402,13 @@ class Ui_frm_fimCadastro(object):
         QMetaObject.connectSlotsByName(frm_fimCadastro)
     # setupUi
 
+    #def registroMobilidade(self):
+
+
+
+
     def retranslateUi(self, frm_fimCadastro):
-        frm_fimCadastro.setWindowTitle(QCoreApplication.translate("frm_fimCadastro", u"Form", None))
+        frm_fimCadastro.setWindowTitle(QCoreApplication.translate("frm_fimCadastro", u"Cadastro de mobilidade", None))
         self.label_9.setText(QCoreApplication.translate("frm_fimCadastro", u"3. Condi\u00e7\u00f5es especiais dos moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_fimCadastro", u"Se sim, quantas pessoas?", None))
         self.btn_continuar.setText(QCoreApplication.translate("frm_fimCadastro", u"Finalizar cadastro de resid\u00eancia", None))

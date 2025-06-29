@@ -18,6 +18,7 @@ class Ui_frm_Moradores(object):
         if not frm_Moradores.objectName():
             frm_Moradores.setObjectName(u"frm_Moradores")
         frm_Moradores.setFixedSize(1061, 708)
+        self.frm_Moradores = frm_Moradores
         frm_Moradores.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -536,8 +537,6 @@ class Ui_frm_Moradores(object):
 
     def cadastroMoradores(self):
 
-        from controle import coordenadas
-
         nome = self.txt_Nome.text().strip()
         idade = self.txt_idade.text().strip()
         email = self.txt_email.text().strip()
@@ -653,6 +652,28 @@ class Ui_frm_Moradores(object):
                 mydb.commit()
                 print('Inseridos')
                 mydb.close()
+        
+
+    def fimDoCadastro(self):
+        
+        from frm_fimCadastro import Ui_frm_fimCadastro
+
+        if not hasattr(self, 'frm_fimCadastro') or self.frm_fimCadastro is None or not self.frm_fimCadastro.isVisible():
+                self.frm_fimCadastro = QWidget()
+                self.ui = Ui_frm_fimCadastro()
+                self.ui.setupUi(self.frm_fimCadastro)
+
+                self.frm_fimCadastro.setAttribute(Qt.WA_DeleteOnClose)
+                self.frm_fimCadastro.destroyed.connect(lambda: setattr(self, 'frm_fimCadastro', None))
+
+                self.frm_fimCadastro.show()   
+
+        else:
+        
+                self.frm_fimCadastro.raise_()
+                self.frm_fimCadastro.activateWindow()
+
+        self.frm_Moradores.close()
 
 
     def retranslateUi(self, frm_Moradores):
@@ -701,6 +722,7 @@ class Ui_frm_Moradores(object):
         self.btn_Finalizar.setText(QCoreApplication.translate("frm_Moradores", u"Finalizar cadastro de moradores", None))
     # retranslateUi
         self.btn_cadastrarM.clicked.connect(self.cadastroMoradores)
+        self.btn_Finalizar.clicked.connect(self.fimDoCadastro)
 
 if __name__ == "__main__":
     app = QApplication([])
