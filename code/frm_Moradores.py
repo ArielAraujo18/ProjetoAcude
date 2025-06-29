@@ -604,6 +604,7 @@ class Ui_frm_Moradores(object):
                 return
 
         if campos:
+
                 preenchidos = [coordenadas, nome, idade, genero, contato, email]
                 mydb = pymysql.connect(
                         host = controle.host,
@@ -620,6 +621,7 @@ class Ui_frm_Moradores(object):
                 mydb.close()
 
         if campos1:
+
                 preenchidos = [coordenadas, nome1, idade1, genero1, contato1, email1]
                 mydb = pymysql.connect(
                         host = controle.host,
@@ -636,6 +638,7 @@ class Ui_frm_Moradores(object):
                 mydb.close()
 
         if campos2:
+
                 preenchidos = [coordenadas, nome2, idade2, genero2, contato2, email2]
                 mydb = pymysql.connect(
                         host = controle.host,
@@ -706,4 +709,3 @@ if __name__ == "__main__":
     ui.setupUi(frm_Moradores)
     frm_Moradores.show()
     app.exec()  
-
