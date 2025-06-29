@@ -543,6 +543,7 @@ class Ui_frm_Moradores(object):
         email = self.txt_email.text().strip()
         contato = self.txt_Contato.text().replace('(', '').replace(')', '').replace('-', '').strip()
         genero = self.comboBox.currentText().strip()
+        coordenadas = controle.coordenadas
 
         campos = [nome, idade, email, contato, genero]
 
@@ -560,9 +561,9 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
         
-        nome1 = self.txt_Nome1.text().strip()
-        idade1 = self.txt_idade1.text().strip()
-        email1 = self.txt_email1.text().strip()
+        nome1 = self.txt_Nome1.text()
+        idade1 = self.txt_idade1.text()
+        email1 = self.txt_email1.text()
         contato1 = self.txt_contato1.text().replace('(', '').replace(')', '').replace('-', '').strip()
         genero1 = self.comboBox_2.currentText().strip()
 
@@ -585,13 +586,13 @@ class Ui_frm_Moradores(object):
         idade2 = self.txt_idade2.text().strip()
         email2 = self.txt_email2.text().strip()
         contato2 = self.txt_contato2.text().replace('(', '').replace(')', '').replace('-', '').strip()
-        genero2 = self.comboBox_2.currentText().strip()
+        genero2 = self.comboBox_3.currentText().strip()
 
         campos2 = [nome2, idade2, email2, contato2, genero2]
 
-        prenchidos = [campos2 for campo in campos2 if campo]
+        preenchidos2 = [campos2 for campo in campos2 if campo]
 
-        if 0 < len(preenchidos1) < len(campos2):
+        if 0 < len(preenchidos2) < len(campos2):
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRO!")
                 msg.setText(f"Preencha todos os campos de morador 3")
@@ -601,8 +602,9 @@ class Ui_frm_Moradores(object):
                 msg.setStandardButtons(QMessageBox.Ok)
                 msg.exec()
                 return
-        
+
         if campos:
+                preenchidos = [coordenadas, nome, idade, genero, contato, email]
                 mydb = pymysql.connect(
                         host = controle.host,
                         user = controle.user,
@@ -612,11 +614,46 @@ class Ui_frm_Moradores(object):
 
                 mycursor = mydb.cursor()
                 sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
-                
+                mycursor.execute(sql, preenchidos)
+                mydb.commit()
+                print('Inseridos')
+                mydb.close()
+
+        if campos1:
+                preenchidos = [coordenadas, nome1, idade1, genero1, contato1, email1]
+                mydb = pymysql.connect(
+                        host = controle.host,
+                        user = controle.user,
+                        password = controle.password,
+                        database = controle.database
+                )
+
+                mycursor = mydb.cursor()
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                mycursor.execute(sql, preenchidos)
+                mydb.commit()
+                print('Inseridos')
+                mydb.close()
+
+        if campos2:
+                preenchidos = [coordenadas, nome2, idade2, genero2, contato2, email2]
+                mydb = pymysql.connect(
+                        host = controle.host,
+                        user = controle.user,
+                        password = controle.password,
+                        database = controle.database
+                )
+
+                mycursor = mydb.cursor()
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                mycursor.execute(sql, preenchidos)
+                mydb.commit()
+                print('Inseridos')
+                mydb.close()
 
 
     def retranslateUi(self, frm_Moradores):
-        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Form", None))
+        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Cadastro Moradores", None))
         self.label_9.setText(QCoreApplication.translate("frm_Moradores", u"2. Moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_10.setText(QCoreApplication.translate("frm_Moradores", u"Morador 1 (Respons\u00e1vel):", None))
