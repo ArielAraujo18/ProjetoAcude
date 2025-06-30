@@ -530,16 +530,7 @@ class Ui_frm_Cadastro(object):
 
         mycursor = mydb.cursor()
         sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
-        valores = (
-                coordenadas,
-                logradouro,
-                numeroResidencial,
-                bairro,
-                habitacao,
-                numeroMoradores,
-                crianca,
-                quantidadeCrianca
-        )
+        valores = (coordenadas, logradouro, numeroResidencial, bairro, habitacao, numeroMoradores, crianca, quantidadeCrianca)
         mycursor.execute(sql, valores   )
         mydb.commit()
         print(mycursor.rowcount, 'Record(s) inserted')
