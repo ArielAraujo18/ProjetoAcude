@@ -7,7 +7,7 @@ from PyQt6.QtWebEngineWidgets import QWebEngineView
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Abrindo index.html")
+        self.setWindowTitle("Maps")
 
         # Caminho absoluto do index.html
         url = QUrl("http://0.0.0.0:8000/")

@@ -437,6 +437,7 @@ class Ui_frm_fimCadastro(object):
 
         coordenadas = controle.coordenadas
 
+        coordenadas = 11111111111
         mydb = pymysql.connect(
                 host = controle.host,
                 user = controle.user,
@@ -445,7 +446,7 @@ class Ui_frm_fimCadastro(object):
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `Mobilidade`, `Quantidade`, `Tipo(s)`, `Internet`, `Televisão`, `Rádio`) values (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO cadastroCondicoesEspeciais(`Coordenadas`, `Mobilidade`, `Quantidade`, `Tipo(s)`, `Internet`, `Televisão`, `Rádio`) values (%s, %s, %s, %s, %s, %s, %s)"
         valores = (coordenadas, mobilidade, quantidade, tipo, internet, televisao, radio)
         mycursor.execute(sql, valores)
         mydb.commit()
