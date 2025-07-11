@@ -66,6 +66,3 @@ async function initMap() {
     script.defer = true;
     dxocument.head.appendChild(script);
 })();
-
-
-//q2
