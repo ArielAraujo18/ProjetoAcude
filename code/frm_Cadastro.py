@@ -12,7 +12,6 @@ import controle
 import pymysql
 import pandas
 
-
 class Ui_frm_Cadastro(object):
     def setupUi(self, frm_Cadastro):
         if not frm_Cadastro.objectName():
