@@ -6,3 +6,4 @@ coordenadas = 0
 
 coordenadas = 0
 finalizado = 'false'
+
