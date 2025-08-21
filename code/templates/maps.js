@@ -7,7 +7,7 @@ async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    const centro = { lat: -20.5208, lng: -43.6919 };
+    const centro = { lat: -6.702437, lng: -36.944493 };
     map = new Map(document.getElementById("map"), {
         center: centro,
         zoom: 18,
@@ -32,7 +32,11 @@ async function initMap() {
 
         // quando tiver 4 pontos, desenhar polígono e verificar ponto
         if (pontos.length === 4) {
-            // desenhar polígono visual
+            console.log("4 pontos definidos:", pontos);
+
+            enviarPontosAoFlask(pontos);
+
+            //desenhar polígono visual
             if (polygon) polygon.setMap(null);
             polygon = new google.maps.Polygon({
                 paths: pontos,
@@ -44,7 +48,7 @@ async function initMap() {
                 map: map
             });
 
-            alert("4 pontos definidos. Clique novamente para testar se está dentro.");
+            alert("4 pontos definidos.");
         }
 
         // se clicar depois de 4 pontos
@@ -76,11 +80,27 @@ async function initMap() {
 // carrega Google Maps
 (function loadGoogleMaps() {
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE&loading=async&libraries=geometry,marker&callback=initMap`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBXFUNhy2LRJkGIiHF1QgiFckX1bKjFeoM&loading=async&libraries=geometry,marker&callback=initMap`;
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
 })();
 
-
-//alterar amanhã
+function enviarPontosAoFlask(pontos) {
+    fetch('http://localhost:5000/receber-coordenadas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ pontos: pontos })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Resposta do Flask:", data);
+        alert("Pontos enviados com sucesso!");
+    })
+    .catch(err => {
+        console.error("Erro ao enviar pontos:", err);
+        alert("Erro ao enviar pontos.");
+    });
+}

@@ -407,6 +407,32 @@ class Ui_frm_fimCadastro(object):
     # setupUi
 
     def registroMobilidade(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database
+        )
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SELECT coordenadas, coordenadasM FROM coordenadas")
+        cood = mycursor.fetchall()
+        print(cood)
+        if cood:
+                coordenadasF = cood[0][0]
+                coordenadasM = cood[0][1]
+        
+        else:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Reinicie o programa e pegue as coordenadas da residência")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                self.frm_Cadastro.close()
+
         campos = {
             "Mobilidade": "Sim" if self.radio_sim.isChecked() else "Não" if self.radio_nao.isChecked() else "",
             "Quantidade": self.txt_coordenadas.text(),
@@ -435,9 +461,7 @@ class Ui_frm_fimCadastro(object):
         televisao = "Sim" if self.radio_sim_4.isChecked() else "Não"
         radio = "Sim" if self.radio_sim_4.isChecked() else "Não"
 
-        coordenadas = controle.coordenadas
 
-        coordenadas = 11111111111
         mydb = pymysql.connect(
                 host = controle.host,
                 user = controle.user,
@@ -446,8 +470,8 @@ class Ui_frm_fimCadastro(object):
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroCondicoesEspeciais(`Coordenadas`, `Mobilidade`, `Quantidade`, `Tipo(s)`, `Internet`, `Televisão`, `Rádio`) values (%s, %s, %s, %s, %s, %s, %s)"
-        valores = (coordenadas, mobilidade, quantidade, tipo, internet, televisao, radio)
+        sql = "INSERT INTO cadastroCondicoesEspeciais(`Coordenadas`, `CoordenadasM`, `Mobilidade`, `Quantidade`, `Tipo(s)`, `Internet`, `Televisão`, `Rádio`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
+        valores = (coordenadasF, coordenadasM, mobilidade, quantidade, tipo, internet, televisao, radio)
         mycursor.execute(sql, valores)
         mydb.commit()
         print(mycursor.rowcount, 'Record(s) inserted')

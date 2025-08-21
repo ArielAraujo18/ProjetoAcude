@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="consulta">
+    <file>consultar.png</file>
+  </qresource>
+</RCC>

@@ -147,10 +147,18 @@ class Ui_frm_Principal(object):
 
         
     def maps(self):
-        self.app = QApplication
-        self.window = QMainWindow()
-        self.window.resize(800, 600)
-        self.window.show()
+        from main import MainWindow
+        if not hasattr(self, 'janela_mapa') or self.janela_mapa is None or not self.janela_mapa.isVisible():
+            self.janela_mapa = MainWindow()
+
+            # Garante que ao fechar a janela, a referência seja limpa
+            self.janela_mapa.setAttribute(Qt.WA_DeleteOnClose)
+            self.janela_mapa.destroyed.connect(lambda: setattr(self, 'janela_mapa', None))
+
+            self.janela_mapa.show()
+        else:
+            self.janela_mapa.raise_()
+            self.janela_mapa.activateWindow()
 
     def retranslateUi(self, frm_Principal):
         frm_Principal.setWindowTitle(QCoreApplication.translate("frm_Principal", u"Tela Principal", None))

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frm_VerCadastros</class>
+ <widget class="QWidget" name="frm_VerCadastros">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>884</width>
+    <height>575</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background: #0033A0;
+}</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>841</width>
+     <height>331</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QTableWidget, QTableView {
+    border: 1px solid #dcdcdc; 
+    border-radius: 5px; 
+    gridline-color: #dcdcdc; 
+    background-color: #ffffff; 
+    font-size: 14px; 
+    color: #333333; 
+}
+
+QHeaderView::section {
+    background-color: #f0f0f0; 
+    color: #333333;
+    font-weight: bold; 
+    border: 1px solid #dcdcdc; 
+    padding: 4px; 
+}
+
+QTableWidget::item:selected, QTableView::item:selected {
+    background-color: #b3d9ff; 
+    color: #000000;
+}
+
+QTableCornerButton::section {
+    background-color: #f0f0f0; 
+    border: 1px solid #dcdcdc;
+}
+
+QScrollBar:vertical {
+    background: #f0f0f0;
+    width: 12px; 
+    margin: 2px 0 2px 0; 
+    border: none; 
+}
+
+QScrollBar::handle:vertical {
+    background: #b0bec5; 
+    min-height: 20px; 
+    border-radius: 6px; 
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #90a4ae; 
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: none; 
+    height: 0px; 
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none; 
+}
+
+QScrollBar:horizontal {
+    background: #f0f0f0; 
+    height: 12px; 
+    margin: 0 2px 0 2px; 
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background: #b0bec5;
+    min-width: 20px; 
+    border-radius: 6px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #90a4ae; 
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    background: none;
+    width: 0px;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>Coordenadas UTM</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Coordenadas </string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Logradouro</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Número</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Bairro</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Habitada</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Número-Moradores</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Crianças</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Quantidade-Crianças</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Nome</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Idade</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Gênero</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Telefone</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>E-mail</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Mobilidade</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Quantidade</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Tipo</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Internet</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Televisão</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Rádio</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>460</y>
+     <width>231</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #32CD32;
+}</string>
+   </property>
+   <property name="text">
+    <string>Pesquisar por nome</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>841</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: #E0E7FF;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 51, 160, 0.3), stop:1 rgba(0, 31, 112, 0.3));
+    padding: 14px 24px;
+    border-radius: 12px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+   </property>
+   <property name="text">
+    <string>VISUALIZAR CADASTROS</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>460</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #32CD32;
+}</string>
+   </property>
+   <property name="text">
+    <string>Visualizar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>460</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #ffcdd2;
+
+}
+
+QPushButton:pressed {
+    background-color: #e57373;
+
+}</string>
+   </property>
+   <property name="text">
+    <string>Voltar</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

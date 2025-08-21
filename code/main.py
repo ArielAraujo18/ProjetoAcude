@@ -1,15 +1,14 @@
 import sys
 import os
-from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
-from PyQt6.QtCore import QUrl
-from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtCore import QUrl
+from PySide6.QtWebEngineWidgets import QWebEngineView
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Maps")
 
-        # Caminho absoluto do index.html
         url = QUrl("http://0.0.0.0:8000/")
 
         # Visualizador

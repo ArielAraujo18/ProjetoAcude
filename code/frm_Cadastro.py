@@ -7,10 +7,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGroupBox, QLabel, QLineEdit,
     QPushButton, QRadioButton, QSizePolicy, QWidget, QMessageBox)
-
+import att
+import pandas as pd
 import controle
 import pymysql
-import pandas
 
 class Ui_frm_Cadastro(object):
     def setupUi(self, frm_Cadastro):
@@ -165,7 +165,7 @@ class Ui_frm_Cadastro(object):
 "}\n"
 "QPushButton:pressed {\n"
 "    background-color: #32CD32;\n"
-"}r")
+"}")
         self.lbl_bairro_2 = QLabel(frm_Cadastro)
         self.lbl_bairro_2.setObjectName(u"lbl_bairro_2")
         self.lbl_bairro_2.setGeometry(QRect(10, 230, 121, 41))
@@ -190,7 +190,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.lbl_coordernadas_2 = QLabel(frm_Cadastro)
         self.lbl_coordernadas_2.setObjectName(u"lbl_coordernadas_2")
-        self.lbl_coordernadas_2.setGeometry(QRect(0, 90, 311, 41))
+        self.lbl_coordernadas_2.setGeometry(QRect(0, 90, 131, 41))
         self.lbl_coordernadas_2.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -293,7 +293,8 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_coordenadas = QLineEdit(frm_Cadastro)
         self.txt_coordenadas.setObjectName(u"txt_coordenadas")
-        self.txt_coordenadas.setGeometry(QRect(320, 80, 331, 51))
+        self.txt_coordenadas.setGeometry(QRect(140, 80, 341, 51))
+        self.txt_coordenadas.setEnabled(False)
         self.txt_coordenadas.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -464,6 +465,23 @@ class Ui_frm_Cadastro(object):
 "    border: 1px solid #3B82F6;\n"
 "}\n"
 "")
+        self.btn_att = QPushButton(frm_Cadastro)
+        self.btn_att.setObjectName(u"btn_att")
+        self.btn_att.setGeometry(QRect(510, 90, 31, 31))
+        self.btn_att.setStyleSheet(u"QPushButton {\n"
+"	 background-image: url(:/atualizar/Imagens/atualizar (1).png);\n"
+"    background-repeat: no-repeat;\n"
+"    background-position: center;\n"
+"    padding: 6px 10px;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #C7D2FE;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #32CD32;\n"
+"}")
 
         self.retranslateUi(frm_Cadastro)
 
@@ -476,6 +494,7 @@ class Ui_frm_Cadastro(object):
             "Número-Moradores": self.txt_numeroMoradores.text().strip(),
             "Quantidade-de-Crianças": self.txt_quantidadeCrianca.text().strip(),
         }
+
         campos_texto = {
             "Coordenadas": self.txt_coordenadas.text().strip(),
             "Logradouro": self.txt_log.text().strip(),
@@ -510,6 +529,7 @@ class Ui_frm_Cadastro(object):
                 return
         
         coordenadas = self.txt_coordenadas.text()
+        print(controle.coordenadasM)
         logradouro = self.txt_log.text()
         numeroResidencial = self.txt_numero.text()
         bairro = self.txt_bairro_2.text()
@@ -517,9 +537,6 @@ class Ui_frm_Cadastro(object):
         crianca = "Sim" if self.radio_sim1_2.isChecked() else "Não"
         numeroMoradores = self.txt_numeroMoradores.text()
         quantidadeCrianca = self.txt_quantidadeCrianca.text()
-        
-        controle.coordenadas = coordenadas
-        print(controle.coordenadas)
 
         mydb = pymysql.connect(
                 host = controle.host,
@@ -529,8 +546,8 @@ class Ui_frm_Cadastro(object):
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s)"
-        valores = (coordenadas, logradouro, numeroResidencial, bairro, habitacao, numeroMoradores, crianca, quantidadeCrianca)
+        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `CoordenadasG`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        valores = (coordenadas,controle.coordenadasM, logradouro, numeroResidencial, bairro, habitacao, numeroMoradores, crianca, quantidadeCrianca)
         mycursor.execute(sql, valores   )
         mydb.commit()
         print(mycursor.rowcount, 'Record(s) inserted')
@@ -541,10 +558,8 @@ class Ui_frm_Cadastro(object):
         self.frm_Cadastro.close()
 
     def continuando(self):
-        
         if controle.finalizado == 'true':
                 from frm_Moradores import Ui_frm_Moradores
-
                 if not hasattr(self, 'frm_Moradores') or self.frm_Moradores is None or not self.frm_Moradores.isVisible():
                         self.frm_Moradores = QWidget()
                         self.ui = Ui_frm_Moradores()
@@ -556,15 +571,57 @@ class Ui_frm_Cadastro(object):
                         self.frm_Moradores.show()        
 
                 else:
-                
                         self.frm_Moradores.raise_()
                         self.frm_Moradores.activateWindow()
-        
         else:
                 print('Não finalizou')
+
+
+    def atualizar(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database
+        )
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SELECT coordenadas, coordenadasM FROM coordenadas")
+        cood = mycursor.fetchall()
+        print(cood)
+        if cood:
+                self.txt_coordenadas.setText(str(cood[0][0]).replace('(', '').replace(')', '').replace("'", "").replace(',', ' '))
+                controle.coordenadasF = cood[0][0]
+                controle.coordenadasM = cood[0][1]
+                print(controle.coordenadasF)
+                print(controle.coordenadasM)
         
+        else:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Reinicie o programa e pegue as coordenadas da residência")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                self.frm_Cadastro.close()
+
+    def excluir(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database
+        )
+        mycursor = mydb.cursor()
+
+        mycursor.execute("DELETE FROM coordenadas")
+        mydb.commit()
+        print(mycursor.rowcount, "registro(s) excluído(s).")
+
     def retranslateUi(self, frm_Cadastro):
-        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastro de residência", None))
+        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Form", None))
         self.lbl_bairro.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
         self.label_6.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00famero total de moradores na resid\u00eancia:", None))
         self.lbl_coordernadas.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas - latitude e longitude):", None))
@@ -575,7 +632,7 @@ class Ui_frm_Cadastro(object):
         self.btn_continuar.setText(QCoreApplication.translate("frm_Cadastro", u"Cadastrar Moradores", None))
         self.lbl_bairro_2.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
         self.label_7.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00famero total de moradores na resid\u00eancia:", None))
-        self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas - latitude e longitude):", None))
+        self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas:", None))
         self.label_8.setText(QCoreApplication.translate("frm_Cadastro", u"Se sim, quantas crian\u00e7as?", None))
         self.groupBox.setTitle(QCoreApplication.translate("frm_Cadastro", u"A resid\u00eancia est\u00e1 habitada?", None))
         self.radio_sim.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
@@ -588,9 +645,12 @@ class Ui_frm_Cadastro(object):
         self.groupBox_3.setTitle(QCoreApplication.translate("frm_Cadastro", u"H\u00e1 crian\u00e7as na resid\u00eancia?", None))
         self.radio_sim1_2.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
         self.radio_nao2_2.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00e3o", None))
+        self.btn_att.setText("")
     # retranslateUi
+
         self.btn_continuar.clicked.connect(self.registrando)
         self.btn_continuar.clicked.connect(self.continuando)
+        self.btn_att.clicked.connect(self.atualizar)
 
 if __name__ == "__main__":
     app = QApplication([])

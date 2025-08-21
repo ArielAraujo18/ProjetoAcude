@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frm_Principal</class>
+ <widget class="QMainWindow" name="frm_Principal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>680</width>
+    <height>673</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+	background: #0033A0;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>661</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {
+    color: #E0E7FF;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 51, 160, 0.3), stop:1 rgba(0, 31, 112, 0.3));
+    padding: 14px 24px;
+    border-radius: 12px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    qproperty-alignment: 'AlignCenter';
+}
+</string>
+    </property>
+    <property name="text">
+     <string>SEGURANÇA DO AÇUDE</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>480</y>
+      <width>681</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+	background-image:url(:/Rodape/logo-ouro-branco (1).png);
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_visualizar">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>390</y>
+      <width>221</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #A5B4FC;
+}</string>
+    </property>
+    <property name="text">
+     <string>VISUALIZAR MAPA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_VerCadastros">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>390</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #A5B4FC;
+}</string>
+    </property>
+    <property name="text">
+     <string>Ver cadastros</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_cadastrar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #E0E7FF;
+    color: #0033A0;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: &quot;Segoe UI&quot;, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+QPushButton:hover {
+    background-color: #C7D2FE;
+}
+QPushButton:pressed {
+    background-color: #32CD32;
+}</string>
+    </property>
+    <property name="text">
+     <string>Cadastrar</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>70</y>
+      <width>681</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+	background-image:url(:/semFundo/Captura de tela de 2025-06-16 00-54-57 (1) (1).png);
+	background-repeat: no-repeat;
+  	background-position: center;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>680</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="Imagens/prefeitura.qrc"/>
+  <include location="Imagens/geotecSfundo.qrc"/>
+  <include location="Imagens/geotec.qrc"/>
+  <include location="Imagens/maps.qrc"/>
+  <include location="Imagens/prefeituraRodape.qrc"/>
+ </resources>
+ <connections/>
+</ui>

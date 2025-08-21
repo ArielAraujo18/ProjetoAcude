@@ -536,13 +536,37 @@ class Ui_frm_Moradores(object):
     # setupUi
 
     def cadastroMoradores(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database
+        )
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SELECT coordenadas, coordenadasM FROM coordenadas")
+        cood = mycursor.fetchall()
+        print(cood)
+        if cood:
+                coordenadasF = cood[0][0]
+                coordenadasM = cood[0][1]
+        
+        else:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRO!")
+                msg.setText(f"Reinicie o programa e pegue as coordenadas da residência")
+                icon_path = r"C:\Users\Ariel\PycharmProjects\Scripts\Sistema\avsIcon.png"
+                msg.setWindowIcon(QIcon(icon_path)) 
+                msg.setIcon(QMessageBox.Information)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.exec()
+                self.frm_Cadastro.close()
 
         nome = self.txt_Nome.text().strip()
         idade = self.txt_idade.text().strip()
         email = self.txt_email.text().strip()
         contato = self.txt_Contato.text().replace('(', '').replace(')', '').replace('-', '').strip()
         genero = self.comboBox.currentText().strip()
-        coordenadas = controle.coordenadas
 
         campos = [nome, idade, email, contato, genero]
 
@@ -560,15 +584,15 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
         
-        nome1 = self.txt_Nome1.text()
-        idade1 = self.txt_idade1.text()
-        email1 = self.txt_email1.text()
+        nome1 = self.txt_Nome1.text().strip()
+        idade1 = self.txt_idade1.text().strip()
+        email1 = self.txt_email1.text().strip()
         contato1 = self.txt_contato1.text().replace('(', '').replace(')', '').replace('-', '').strip()
         genero1 = self.comboBox_2.currentText().strip()
 
         campos1 = [nome1, idade1, email1, contato1, genero1]
 
-        preenchidos1 = [campos1 for campo in campos1 if campo]
+        preenchidos1 = [campos1  for campo in campos1 if campo]
 
         if 0 < len(preenchidos1) < len(campos1):
                 msg = QMessageBox()
@@ -602,9 +626,9 @@ class Ui_frm_Moradores(object):
                 msg.exec()
                 return
 
-        if campos:
-
-                preenchidos = [coordenadas, nome, idade, genero, contato, email]
+        semDados = '' in campos
+        if semDados == False:
+                preenchidos = [coordenadasF, coordenadasM, nome, idade, genero, contato, email]
                 mydb = pymysql.connect(
                         host = controle.host,
                         user = controle.user,
@@ -613,15 +637,15 @@ class Ui_frm_Moradores(object):
                 )
 
                 mycursor = mydb.cursor()
-                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `CoordenadasM`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, preenchidos)
                 mydb.commit()
                 print('Inseridos')
                 mydb.close()
 
-        if campos1:
-
-                preenchidos = [coordenadas, nome1, idade1, genero1, contato1, email1]
+        semDados1 = '' in campos1
+        if semDados1 == False:
+                preenchidos = [coordenadasF, coordenadasM, nome1, idade1, genero1, contato1, email1]
                 mydb = pymysql.connect(
                         host = controle.host,
                         user = controle.user,
@@ -630,15 +654,15 @@ class Ui_frm_Moradores(object):
                 )
 
                 mycursor = mydb.cursor()
-                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `CoordenadasM`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, preenchidos)
                 mydb.commit()
                 print('Inseridos')
                 mydb.close()
 
-        if campos2:
-
-                preenchidos = [coordenadas, nome2, idade2, genero2, contato2, email2]
+        semDados2 = '' in campos2
+        if semDados2 == False:
+                preenchidos = [coordenadasF, coordenadasM, nome2, idade2, genero2, contato2, email2]
                 mydb = pymysql.connect(
                         host = controle.host,
                         user = controle.user,
@@ -647,12 +671,29 @@ class Ui_frm_Moradores(object):
                 )
 
                 mycursor = mydb.cursor()
-                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s)"
+                sql = "INSERT INTO cadastroMoradores(`Coordenadas`, `CoordenadasM`, `Nome`, `Idade`, `Gênero`, `Telefone`, `E-mail`) values (%s, %s, %s, %s, %s, %s, %s)"
                 mycursor.execute(sql, preenchidos)
                 mydb.commit()
                 print('Inseridos')
                 mydb.close()
         
+        self.txt_Nome.setText('')
+        self.txt_idade.setText('')
+        self.comboBox.setCurrentIndex(0)
+        self.txt_Contato.setText('')
+        self.txt_email.setText('')
+
+        self.txt_Nome1.setText('')
+        self.txt_idade1.setText('')
+        self.comboBox_2.setCurrentIndex(0)
+        self.txt_contato1.setText('')
+        self.txt_email1.setText('')
+
+        self.txt_Nome_2.setText('')
+        self.txt_idade2.setText('')
+        self.comboBox_3.setCurrentIndex(0)
+        self.txt_contato2.setText('')
+        self.txt_email2.setText('')
 
     def fimDoCadastro(self):
         
@@ -705,7 +746,7 @@ class Ui_frm_Moradores(object):
         self.lbl_coordernadas_11.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_11.setText(QCoreApplication.translate("frm_Moradores", u"Morador 2:", None))
         self.txt_contato1.setInputMask(QCoreApplication.translate("frm_Moradores", u"(00) 0 0000-0000", None))
-        self.btn_cadastrarM.setText(QCoreApplication.translate("frm_Moradores", u"Cadastrar mais moradores", None))
+        self.btn_cadastrarM.setText(QCoreApplication.translate("frm_Moradores", u"Cadastrar moradores", None))
         self.lbl_coordernadas_12.setText(QCoreApplication.translate("frm_Moradores", u"G\u00eanero:", None))
         self.lbl_coordernadas_13.setText(QCoreApplication.translate("frm_Moradores", u"E-mail:", None))
         self.lbl_coordernadas_14.setText(QCoreApplication.translate("frm_Moradores", u"Idade:", None))
