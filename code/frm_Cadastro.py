@@ -546,7 +546,7 @@ class Ui_frm_Cadastro(object):
         )
 
         mycursor = mydb.cursor()
-        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `CoordenadasG`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO cadastroResidencia(`Coordenadas`, `CoordenadasM`, `Logradouro`, `Número`, `Bairro`, `Habitada`, `Número-Moradores`, `Crianças`, `Quantidade-Crianças`) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         valores = (coordenadas,controle.coordenadasM, logradouro, numeroResidencial, bairro, habitacao, numeroMoradores, crianca, quantidadeCrianca)
         mycursor.execute(sql, valores   )
         mydb.commit()
