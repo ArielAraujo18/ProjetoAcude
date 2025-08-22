@@ -7,12 +7,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QPushButton,
     QSizePolicy, QTableWidget, QTableWidgetItem, QWidget)
+from frm_ConsultarPorNome import Ui_frm_ConsultarPorNome
+
+import pandas as pd
+import controle
+import pymysql
 
 class Ui_frm_VerCadastros(object):
     def setupUi(self, frm_VerCadastros):
         if not frm_VerCadastros.objectName():
             frm_VerCadastros.setObjectName(u"frm_VerCadastros")
-        frm_VerCadastros.resize(884, 575)
+        frm_VerCadastros.setFixedSize(884, 575)
+        self.frm_VerCadastros = frm_VerCadastros
         frm_VerCadastros.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -225,6 +231,61 @@ class Ui_frm_VerCadastros(object):
         QMetaObject.connectSlotsByName(frm_VerCadastros)
     # setupUi
 
+    def tabela(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database,
+        )
+
+        mycursor = mydb.cursor()
+
+        querySQL = "SELECT * FROM cadastroGeral"
+
+        mycursor.execute(querySQL)
+        myresult = mycursor.fetchall()
+
+        df = pd.DataFrame(
+            myresult,
+            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
+        )
+        self.all_data = df
+
+        numRows, numCols = self.all_data.shape
+        self.tableWidget.setRowCount(numRows)
+        self.tableWidget.setColumnCount(numCols)
+        self.tableWidget.setHorizontalHeaderLabels(self.all_data.columns)
+
+        for i, row in enumerate(self.all_data.itertuples(index=False)):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i,j, QTableWidgetItem(str(value)))
+        
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.resizeRowsToContents()
+
+        mycursor.close()
+        mydb.close()
+
+    def consultarNome(self):
+        if not hasattr(self, 'frm_ConsultarPorNome') or self.frm_ConsultarPorNome is None or not self.frm_ConsultarPorNome.isVisible():
+            self.frm_ConsultarPorNome = QWidget()
+            self.ui = Ui_frm_ConsultarPorNome()
+            self.ui.setupUi(self.frm_ConsultarPorNome)
+
+            self.frm_ConsultarPorNome.setAttribute(Qt.WA_DeleteOnClose)
+            self.frm_ConsultarPorNome.destroyed.connect(lambda: setattr(self, 'frm_Cadastro', None))
+
+            self.frm_ConsultarPorNome.show()        
+
+        else:
+        
+            self.frm_ConsultarPorNome.raise_()
+            self.frm_ConsultarPorNome.activateWindow()
+        
+    def close(self):
+        self.frm_VerCadastros.close()
+
     def retranslateUi(self, frm_VerCadastros):
         frm_VerCadastros.setWindowTitle(QCoreApplication.translate("frm_VerCadastros", u"Form", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
@@ -272,6 +333,12 @@ class Ui_frm_VerCadastros(object):
         self.pushButton_4.setText(QCoreApplication.translate("frm_VerCadastros", u"Visualizar", None))
         self.pushButton_5.setText(QCoreApplication.translate("frm_VerCadastros", u"Voltar", None))
     # retranslateUi
+        self.tabela()
+        #pushButton_3 PESQUISAR POR NOME
+        self.pushButton_3.clicked.connect(self.consultarNome)
+        self.pushButton_3.clicked.connect(self.close)
+        #pushButton_4 VISUALIZAR
+        #pushButton_5 VOLTAR
 
 if __name__ == "__main__":
     app = QApplication([])

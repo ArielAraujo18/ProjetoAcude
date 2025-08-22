@@ -477,7 +477,71 @@ class Ui_frm_fimCadastro(object):
         print(mycursor.rowcount, 'Record(s) inserted')
         mycursor.close()
 
+    def cadGeral(self):
+        
+        mydb = pymysql.connect(
+             host = controle.host,
+             user = controle.user,
+             password= controle.password,
+             database = controle.database
+        )
 
+        mycursor = mydb.cursor()
+
+        query = """
+        INSERT INTO cadastroGeral (
+                Id, Coordenadas, CoordenadasM, Nome, Idade, Gênero, Telefone, `E-mail`,
+                Logradouro, `Número`, Bairro, Habitada, `Número-Moradores`, Crianças, `Quantidade-Crianças`,
+                Mobilidade, Quantidade, `Tipo(s)`, Internet, Televisão, Rádio
+        )
+        SELECT 
+                m.Id,
+                m.Coordenadas,
+                m.CoordenadasM,
+                m.Nome,
+                m.Idade,
+                m.Gênero,
+                m.Telefone,
+                m.`E-mail`,
+                r.Logradouro,
+                r.`Número`,
+                r.Bairro,
+                r.Habitada,
+                r.`Número-Moradores`,
+                r.Crianças,
+                r.`Quantidade-Crianças`,
+                c.Mobilidade,
+                c.Quantidade,
+                c.`Tipo(s)`,
+                c.Internet,
+                c.Televisão,
+                c.Rádio
+        FROM cadastroMoradores m
+        LEFT JOIN cadastroResidencia r ON m.CoordenadasM = r.CoordenadasM
+        LEFT JOIN cadastroCondicoesEspeciais c ON m.CoordenadasM = c.CoordenadasM;
+        """
+
+        mycursor.execute(query)
+        mydb.commit()
+        mycursor.close()
+        print('Fim')
+
+    def limparBd(self):
+        mydb = pymysql.connect(
+             host = controle.host,
+             user = controle.user,
+             password= controle.password,
+             database = controle.database
+        )
+
+        mycursor = mydb.cursor()
+
+        query = "DELETE FROM coordenadas"
+
+        mycursor.execute(query)
+        mydb.commit()
+        mycursor.close()
+        print('Fim')
     def retranslateUi(self, frm_fimCadastro):
         frm_fimCadastro.setWindowTitle(QCoreApplication.translate("frm_fimCadastro", u"Cadastro de mobilidade", None))
         self.label_9.setText(QCoreApplication.translate("frm_fimCadastro", u"3. Condi\u00e7\u00f5es especiais dos moradores", None))
@@ -501,6 +565,7 @@ class Ui_frm_fimCadastro(object):
     # retranslateUi
         
         self.btn_continuar.clicked.connect(self.registroMobilidade)
+        self.btn_continuar.clicked.connect(self.cadGeral)
 
 if __name__ == "__main__":
     app = QApplication([])
