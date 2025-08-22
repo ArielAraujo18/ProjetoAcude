@@ -11,11 +11,16 @@ from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QLineEdit,
 import pesquisar
 import consultar
 
+import controle
+import pandas as pd
+import pymysql
+
 class Ui_frm_ConsultarPorNome(object):
     def setupUi(self, frm_ConsultarPorNome):
         if not frm_ConsultarPorNome.objectName():
             frm_ConsultarPorNome.setObjectName(u"frm_ConsultarPorNome")
-        frm_ConsultarPorNome.resize(581, 592)
+        frm_ConsultarPorNome.setFixedSize(581, 592)
+        self.frm_ConsultarPorNome = frm_ConsultarPorNome
         frm_ConsultarPorNome.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -85,14 +90,15 @@ class Ui_frm_ConsultarPorNome(object):
 "    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);\n"
 "}\n"
 "")
-        self.txt_nomeCliente = QLineEdit(frm_ConsultarPorNome)
-        self.txt_nomeCliente.setObjectName(u"txt_nomeCliente")
-        self.txt_nomeCliente.setGeometry(QRect(250, 100, 291, 41))
+        self.txt_nomeMorador = QLineEdit(frm_ConsultarPorNome)
+        self.txt_nomeMorador.setObjectName(u"txt_nomeMorador")
+        self.txt_nomeMorador.setGeometry(QRect(250, 100, 291, 41))
         font1 = QFont()
-        self.txt_nomeCliente.setFont(font1)
-        self.txt_nomeCliente.setStyleSheet(u"QLineEdit {\n"
+        self.txt_nomeMorador.setFont(font1)
+        self.txt_nomeMorador.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #cccccc; \n"
 "    border-radius: 5px; \n"
+"    color: #000000;\n"
 "    padding: 6px; \n"
 "    font-size: 14px; \n"
 "    background-color: #ffffff;\n"
@@ -250,8 +256,84 @@ class Ui_frm_ConsultarPorNome(object):
         QMetaObject.connectSlotsByName(frm_ConsultarPorNome)
     # setupUi
 
+    def tabela(self):
+        mydb = pymysql.connect(
+            host=controle.host,
+            user=controle.user,
+            password=controle.password,
+            database=controle.database,
+        )
+
+        mycursor = mydb.cursor()
+
+        querySQL = "SELECT * FROM cadastroGeral"
+
+        mycursor.execute(querySQL)
+        myresult = mycursor.fetchall()
+
+        df = pd.DataFrame(
+            myresult,
+            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
+        )
+        self.all_data = df
+
+        numRows, numCols = self.all_data.shape
+        self.tableWidget.setRowCount(numRows)
+        self.tableWidget.setColumnCount(numCols)
+        self.tableWidget.setHorizontalHeaderLabels(self.all_data.columns)
+
+        for i, row in enumerate(self.all_data.itertuples(index=False)):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i,j, QTableWidgetItem(str(value)))
+        
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.resizeRowsToContents()
+
+        mycursor.close()
+        mydb.close()
+
+    def pesquisarPorNome(self):
+        self.host = controle.host
+        self.user = controle.user
+        self.password = controle.password
+        self.database = controle.database 
+        print('Conectando...')
+        mydb = pymysql.connect(
+                host = controle.host,
+                user = controle.user,
+                password = controle.password,
+                database = controle.database
+        )
+        print('Conexão bem-sucedida!')
+
+        mycursor = mydb.cursor()
+
+        nomeConsulta = self.txt_nomeMorador.text()
+        consultaSQL = "SELECT * FROM cadastroGeral WHERE nome LIKE %s"
+        mycursor.execute(consultaSQL, ('%' + nomeConsulta + '%',))
+
+        myresult = mycursor.fetchall()
+
+        df = pd.DataFrame(myresult, columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", "Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"])
+        self.all_data = df
+
+        numRows = len(self.all_data.index)
+        numCols = len(self.all_data.columns)
+        self.tableWidget.setColumnCount(numCols)
+        self.tableWidget.setRowCount(numRows)
+        self.tableWidget.setHorizontalHeaderLabels(self.all_data.columns)
+
+        for i in range(numRows):
+                for j in range(numCols):
+                        self.tableWidget.setItem(i, j, QTableWidgetItem(str(self.all_data.iat[i, j])))
+
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.resizeRowsToContents()
+
+        mycursor.close()
+
     def retranslateUi(self, frm_ConsultarPorNome):
-        frm_ConsultarPorNome.setWindowTitle(QCoreApplication.translate("frm_ConsultarPorNome", u"Form", None))
+        frm_ConsultarPorNome.setWindowTitle(QCoreApplication.translate("frm_ConsultarPorNome", u"Consultar Morador por Nome", None))
         self.btn_consultar.setText("")
         self.btn_pesquisar.setText("")
         self.lbl_nomeCliente.setText(QCoreApplication.translate("frm_ConsultarPorNome", u"Nome do morador responsav\u00e9l:", None))
@@ -297,7 +379,8 @@ class Ui_frm_ConsultarPorNome(object):
         ___qtablewidgetitem19 = self.tableWidget.horizontalHeaderItem(19)
         ___qtablewidgetitem19.setText(QCoreApplication.translate("frm_ConsultarPorNome", u"R\u00e1dio", None));
     # retranslateUi
-
+        self.tabela()
+        self.btn_pesquisar.clicked.connect(self.pesquisarPorNome)
 
 if __name__ == "__main__":
     app = QApplication([])

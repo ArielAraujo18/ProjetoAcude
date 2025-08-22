@@ -95,12 +95,12 @@ class Ui_frm_ConsultarPorNome(object):
 "    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);\n"
 "}\n"
 "")
-        self.txt_nomeCliente = QLineEdit(frm_ConsultarPorNome)
-        self.txt_nomeCliente.setObjectName(u"txt_nomeCliente")
-        self.txt_nomeCliente.setGeometry(QRect(250, 100, 291, 41))
+        self.txt_nomeMorador = QLineEdit(frm_ConsultarPorNome)
+        self.txt_nomeMorador.setObjectName(u"txt_nomeMorador")
+        self.txt_nomeMorador.setGeometry(QRect(250, 100, 291, 41))
         font1 = QFont()
-        self.txt_nomeCliente.setFont(font1)
-        self.txt_nomeCliente.setStyleSheet(u"QLineEdit {\n"
+        self.txt_nomeMorador.setFont(font1)
+        self.txt_nomeMorador.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #cccccc; \n"
 "    border-radius: 5px; \n"
 "    padding: 6px; \n"
