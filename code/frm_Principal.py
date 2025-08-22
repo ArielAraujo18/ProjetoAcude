@@ -160,6 +160,23 @@ class Ui_frm_Principal(object):
             self.janela_mapa.raise_()
             self.janela_mapa.activateWindow()
 
+    def verCadastros(self):
+        from frm_VerCadastros import Ui_frm_VerCadastros
+        if not hasattr(self, 'frm_verCadastros') or self.frm_verCadastros is None or not self.frm_verCadastros.isVisible():
+            self.frm_verCadastros = QWidget()
+            self.ui = Ui_frm_VerCadastros()
+            self.ui.setupUi(self.frm_verCadastros)
+
+            self.frm_verCadastros.setAttribute(Qt.WA_DeleteOnClose)
+            self.frm_verCadastros.destroyed.connect(lambda: setattr(self, 'frm_verCadastros', None))
+
+            self.frm_verCadastros.show()        
+
+        else:
+        
+            self.frm_verCadastros.raise_()
+            self.frm_verCadastros.activateWindow()
+
     def retranslateUi(self, frm_Principal):
         frm_Principal.setWindowTitle(QCoreApplication.translate("frm_Principal", u"Tela Principal", None))
         self.label.setText(QCoreApplication.translate("frm_Principal", u"SEGURAN\u00c7A DO A\u00c7UDE", None))
@@ -173,6 +190,7 @@ class Ui_frm_Principal(object):
         self.btn_cadastrar.clicked.connect(self.register)
         self.btn_cadastrar.clicked.connect(self.maps)
         self.btn_visualizar.clicked.connect(self.maps)
+        self.btn_VerCadastros.clicked.connect(self.verCadastros)
 
 if __name__ == "__main__":
     app = QApplication([])

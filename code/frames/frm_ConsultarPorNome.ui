@@ -124,7 +124,7 @@ QPushButton:pressed {
     <string>Nome do morador responsavél:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txt_nomeCliente">
+  <widget class="QLineEdit" name="txt_nomeMorador">
    <property name="geometry">
     <rect>
      <x>250</x>
