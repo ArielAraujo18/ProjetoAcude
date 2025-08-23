@@ -18,6 +18,7 @@ class Ui_frm_fimCadastro(object):
         if not frm_fimCadastro.objectName():
             frm_fimCadastro.setObjectName(u"frm_fimCadastro")
         frm_fimCadastro.setFixedSize(676, 733)
+        self.frm_fimCadastro = frm_fimCadastro
         frm_fimCadastro.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -477,6 +478,7 @@ class Ui_frm_fimCadastro(object):
         print(mycursor.rowcount, 'Record(s) inserted')
         mycursor.close()
 
+        self.frm_fimCadastro.close()
     def cadGeral(self):
         
         mydb = pymysql.connect(
@@ -542,8 +544,9 @@ class Ui_frm_fimCadastro(object):
         mydb.commit()
         mycursor.close()
         print('Fim')
+        
     def retranslateUi(self, frm_fimCadastro):
-        frm_fimCadastro.setWindowTitle(QCoreApplication.translate("frm_fimCadastro", u"Cadastro de mobilidade", None))
+        frm_fimCadastro.setWindowTitle(QCoreApplication.translate("frm_fimCadastro", u"Cadastrar", None))
         self.label_9.setText(QCoreApplication.translate("frm_fimCadastro", u"3. Condi\u00e7\u00f5es especiais dos moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_fimCadastro", u"Se sim, quantas pessoas?", None))
         self.btn_continuar.setText(QCoreApplication.translate("frm_fimCadastro", u"Finalizar cadastro de resid\u00eancia", None))
@@ -566,6 +569,7 @@ class Ui_frm_fimCadastro(object):
         
         self.btn_continuar.clicked.connect(self.registroMobilidade)
         self.btn_continuar.clicked.connect(self.cadGeral)
+        self.btn_continuar.clicked.connect(self.limparBd)
 
 if __name__ == "__main__":
     app = QApplication([])

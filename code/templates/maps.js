@@ -2,8 +2,10 @@ let map;
 let marker;
 let pontos = []; // armazenar os 4 pontos
 let polygon = null;
+let marcadores = []; // guardar os marcadores atuais
 
 async function initMap() {
+    console.log("Mapa inicializado, chamando carregarCoordenadas()");
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
@@ -14,7 +16,12 @@ async function initMap() {
         mapTypeId: "satellite",
         mapId: "YOUR_MAP_ID"
     });
+     //Atualiza automaticamente a cada 5 segundos
+    setInterval(atualizarCoordenadas, 5000);
+    //Atualiza uma vez imediatamente
+    atualizarCoordenadas();
 
+    carregarCoordenadas();
     map.addListener("click", async (event) => {
         const lat = event.latLng.lat();
         const lng = event.latLng.lng();
@@ -29,6 +36,7 @@ async function initMap() {
 
         // adiciona ponto
         pontos.push(coords);
+        
 
         // quando tiver 4 pontos, desenhar polígono e verificar ponto
         if (pontos.length === 4) {
@@ -103,4 +111,87 @@ function enviarPontosAoFlask(pontos) {
         console.error("Erro ao enviar pontos:", err);
         alert("Erro ao enviar pontos.");
     });
+}
+
+async function carregarCoordenadas() {
+    try {
+        const res = await fetch("http://localhost:5001/receber-coordenadas");
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+            console.log("Pontos recebidos do Flask:", data);
+
+            data.forEach((p, i) => {
+                new google.maps.marker.AdvancedMarkerElement({
+                    position: { lat: p.lat, lng: p.lng },
+                    map: map,
+                    title: `Ponto ${i + 1}`
+                });
+            });
+
+            if (data.length >= 3) {
+                const polygon = new google.maps.Polygon({
+                    paths: data,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35,
+                    map: map
+                });
+            }
+
+            map.setCenter(data[0]);
+        } else {
+            console.warn("Nenhum ponto retornado do Flask.");
+        }
+    } catch (err) {
+        console.error("Erro ao carregar coordenadas:", err);
+    }
+}
+
+async function atualizarCoordenadas() {
+    try {
+        const res = await fetch("http://localhost:5001/receber-coordenadas");
+        const data = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+            console.log("Coordenadas recebidas:", data);
+
+            // Remove marcadores antigos
+            marcadores.forEach(m => m.setMap(null));
+            marcadores = [];
+
+            // Cria novos marcadores
+            data.forEach((p, i) => {
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    position: { lat: p.lat, lng: p.lng },
+                    map: map,
+                    title: `Ponto ${i + 1}`
+                });
+                marcadores.push(marker);
+            });
+
+            // Remove polígono antigo
+            if (polygon) polygon.setMap(null);
+
+            // Desenha polígono se houver 3 ou mais pontos
+            if (data.length >= 3) {
+                polygon = new google.maps.Polygon({
+                    paths: data,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#FF0000",
+                    fillOpacity: 0.35,
+                    map: map
+                });
+            }
+
+            // Centraliza no primeiro ponto
+            map.setCenter(data[0]);
+        }
+    } catch (err) {
+        console.error("Erro ao atualizar coordenadas:", err);
+    }
 }

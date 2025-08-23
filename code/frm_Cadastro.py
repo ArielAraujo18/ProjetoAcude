@@ -621,7 +621,7 @@ class Ui_frm_Cadastro(object):
         print(mycursor.rowcount, "registro(s) excluído(s).")
 
     def retranslateUi(self, frm_Cadastro):
-        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Form", None))
+        frm_Cadastro.setWindowTitle(QCoreApplication.translate("frm_Cadastro", u"Cadastrar", None))
         self.lbl_bairro.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
         self.label_6.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00famero total de moradores na resid\u00eancia:", None))
         self.lbl_coordernadas.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas - latitude e longitude):", None))

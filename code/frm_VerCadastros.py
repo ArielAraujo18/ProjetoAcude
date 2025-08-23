@@ -6,12 +6,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QPushButton,
-    QSizePolicy, QTableWidget, QTableWidgetItem, QWidget)
+    QSizePolicy, QTableWidget, QTableWidgetItem, QWidget, QMessageBox)
 from frm_ConsultarPorNome import Ui_frm_ConsultarPorNome
 
 import pandas as pd
 import controle
 import pymysql
+import requests
+import json
 
 class Ui_frm_VerCadastros(object):
     def setupUi(self, frm_VerCadastros):
@@ -286,8 +288,45 @@ class Ui_frm_VerCadastros(object):
     def close(self):
         self.frm_VerCadastros.close()
 
+    def visualizar(self):
+        line = self.tableWidget.currentRow()
+
+        if line == -1:
+            msg = QMessageBox()
+            msg.setWindowTitle("ERRO!")
+            msg.setText("Por favor, selecione um morador para visualizar.")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
+            return
+
+        col_coordenadas = 2 
+        item = self.tableWidget.item(line, col_coordenadas)
+
+        if item:
+            coords_text = item.text()
+            print("Coordenadas lidas:", coords_text)
+
+            try:
+                valores = [float(v.strip()) for v in coords_text.split(",")]
+
+                pontos = []
+                for i in range(0, len(valores), 2):
+                    pontos.append({"lat": valores[i], "lng": valores[i+1]})
+
+                response = requests.post(
+                    "http://localhost:5001/receber-coordenadas",
+                    json={"pontos": pontos}
+                )
+                print("Pontos enviados para o Flask:", pontos)
+                print("Resposta do Flask:", response.json())
+
+            except Exception as e:
+                print("Erro ao enviar coordenadas:", e)
+        
+
     def retranslateUi(self, frm_VerCadastros):
-        frm_VerCadastros.setWindowTitle(QCoreApplication.translate("frm_VerCadastros", u"Form", None))
+        frm_VerCadastros.setWindowTitle(QCoreApplication.translate("frm_VerCadastros", u"Ver cadastros", None))
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("frm_VerCadastros", u"Coordenadas UTM", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
@@ -338,6 +377,7 @@ class Ui_frm_VerCadastros(object):
         self.pushButton_3.clicked.connect(self.consultarNome)
         self.pushButton_3.clicked.connect(self.close)
         #pushButton_4 VISUALIZAR
+        self.pushButton_4.clicked.connect(self.visualizar)
         #pushButton_5 VOLTAR
 
 if __name__ == "__main__":

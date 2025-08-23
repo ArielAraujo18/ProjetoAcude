@@ -718,7 +718,7 @@ class Ui_frm_Moradores(object):
 
 
     def retranslateUi(self, frm_Moradores):
-        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Cadastro Moradores", None))
+        frm_Moradores.setWindowTitle(QCoreApplication.translate("frm_Moradores", u"Cadastrar", None))
         self.label_9.setText(QCoreApplication.translate("frm_Moradores", u"2. Moradores", None))
         self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Moradores", u"Nome completo:", None))
         self.label_10.setText(QCoreApplication.translate("frm_Moradores", u"Morador 1 (Respons\u00e1vel):", None))
