@@ -1,10 +1,22 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import time
+import threading
 
 app = Flask(__name__)
 CORS(app)
 
-pontos_armazenados = []
+pontos_armazenados = {
+    "dados": [],
+    "timestamp": 0
+}
+
+def limpar_dados_apos_delay():
+    global pontos_armazenados
+    time.sleep(10)
+    if time.time() - pontos_armazenados["timestamp"] >= 10:
+        pontos_armazenados = {"dados": [], "timestamp": 0}
+        print("⏱ Dados limpos automaticamente após 10s")
 
 @app.route("/receber-coordenadas", methods=["POST"])
 def receber_coordenadas():
@@ -17,7 +29,6 @@ def receber_coordenadas():
         lat = float(p["lat"])
         lng = float(p["lng"])
 
-        # Corrige os sinais para o RN (Sul e Oeste)
         if lat > 0:
             lat = -lat
         if lng > 0:
@@ -28,15 +39,21 @@ def receber_coordenadas():
             "lng": lng
         })
 
-    pontos_armazenados.extend(pontos_corrigidos)
-    print("Pontos recebidos (corrigidos):", pontos_armazenados)
+    pontos_armazenados = {
+        "dados": pontos_corrigidos,
+        "timestamp": time.time()
+    }
 
-    return jsonify({"status": "ok", "total": len(pontos_armazenados)})
+    threading.Thread(target=limpar_dados_apos_delay, daemon=True).start()
+
+    print("📍 Pontos recebidos (corrigidos):", pontos_armazenados["dados"])
+
+    return jsonify({"status": "ok", "total": len(pontos_corrigidos)})
 
 @app.route("/receber-coordenadas", methods=["GET"])
 def enviar_coordenadas():
     global pontos_armazenados
-    return jsonify(pontos_armazenados)
+    return jsonify(pontos_armazenados["dados"])
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
