@@ -16,7 +16,7 @@ def limpar_dados_apos_delay():
     time.sleep(10)
     if time.time() - pontos_armazenados["timestamp"] >= 10:
         pontos_armazenados = {"dados": [], "timestamp": 0}
-        print("⏱ Dados limpos automaticamente após 10s")
+        print("Dados limpos")
 
 @app.route("/receber-coordenadas", methods=["POST"])
 def receber_coordenadas():
