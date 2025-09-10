@@ -21,7 +21,7 @@ async function iniciarMap() {
 
     setInterval(() => {
         marcarCasasDoBD(AdvancedMarkerElement);
-    }, 30000);
+    }, 150000);
 
      //Atualiza automaticamente a cada 5 segundos
     setInterval(atualizarCoordenadas, 5000);

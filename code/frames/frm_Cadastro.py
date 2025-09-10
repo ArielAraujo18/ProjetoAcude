@@ -17,6 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGroupBox, QLabel, QLineEdit,
     QPushButton, QRadioButton, QSizePolicy, QWidget)
+import att_rc
 
 class Ui_frm_Cadastro(object):
     def setupUi(self, frm_Cadastro):
@@ -153,7 +154,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.btn_continuar = QPushButton(frm_Cadastro)
         self.btn_continuar.setObjectName(u"btn_continuar")
-        self.btn_continuar.setGeometry(QRect(190, 580, 321, 61))
+        self.btn_continuar.setGeometry(QRect(190, 610, 321, 61))
         self.btn_continuar.setStyleSheet(u"QPushButton {\n"
 "    background-color: #E0E7FF;\n"
 "    color: #0033A0;\n"
@@ -170,10 +171,10 @@ class Ui_frm_Cadastro(object):
 "}\n"
 "QPushButton:pressed {\n"
 "    background-color: #32CD32;\n"
-"}r")
+"}")
         self.lbl_bairro_2 = QLabel(frm_Cadastro)
         self.lbl_bairro_2.setObjectName(u"lbl_bairro_2")
-        self.lbl_bairro_2.setGeometry(QRect(10, 230, 121, 41))
+        self.lbl_bairro_2.setGeometry(QRect(10, 230, 61, 41))
         self.lbl_bairro_2.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -184,7 +185,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.label_7 = QLabel(frm_Cadastro)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(0, 420, 371, 41))
+        self.label_7.setGeometry(QRect(0, 450, 371, 41))
         self.label_7.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -195,7 +196,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.lbl_coordernadas_2 = QLabel(frm_Cadastro)
         self.lbl_coordernadas_2.setObjectName(u"lbl_coordernadas_2")
-        self.lbl_coordernadas_2.setGeometry(QRect(0, 90, 311, 41))
+        self.lbl_coordernadas_2.setGeometry(QRect(0, 90, 131, 41))
         self.lbl_coordernadas_2.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -206,7 +207,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_numeroMoradores = QLineEdit(frm_Cadastro)
         self.txt_numeroMoradores.setObjectName(u"txt_numeroMoradores")
-        self.txt_numeroMoradores.setGeometry(QRect(370, 410, 71, 51))
+        self.txt_numeroMoradores.setGeometry(QRect(370, 440, 71, 51))
         self.txt_numeroMoradores.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -218,7 +219,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.label_8 = QLabel(frm_Cadastro)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setGeometry(QRect(280, 500, 221, 41))
+        self.label_8.setGeometry(QRect(280, 530, 221, 41))
         self.label_8.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -229,7 +230,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.groupBox = QGroupBox(frm_Cadastro)
         self.groupBox.setObjectName(u"groupBox")
-        self.groupBox.setGeometry(QRect(370, 220, 261, 80))
+        self.groupBox.setGeometry(QRect(400, 240, 261, 80))
         self.groupBox.setStyleSheet(u"QGroupBox {\n"
 "    border: 2px solid #4DA8DA;\n"
 "    border-radius: 8px;\n"
@@ -298,7 +299,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_coordenadas = QLineEdit(frm_Cadastro)
         self.txt_coordenadas.setObjectName(u"txt_coordenadas")
-        self.txt_coordenadas.setGeometry(QRect(320, 80, 331, 51))
+        self.txt_coordenadas.setGeometry(QRect(140, 80, 341, 51))
         self.txt_coordenadas.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -310,7 +311,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.lbl_numero = QLabel(frm_Cadastro)
         self.lbl_numero.setObjectName(u"lbl_numero")
-        self.lbl_numero.setGeometry(QRect(430, 160, 81, 41))
+        self.lbl_numero.setGeometry(QRect(10, 300, 81, 41))
         self.lbl_numero.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 18px;\n"
@@ -321,7 +322,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_quantidadeCrianca = QLineEdit(frm_Cadastro)
         self.txt_quantidadeCrianca.setObjectName(u"txt_quantidadeCrianca")
-        self.txt_quantidadeCrianca.setGeometry(QRect(510, 490, 61, 51))
+        self.txt_quantidadeCrianca.setGeometry(QRect(510, 520, 61, 51))
         self.txt_quantidadeCrianca.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -333,7 +334,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_bairro_2 = QLineEdit(frm_Cadastro)
         self.txt_bairro_2.setObjectName(u"txt_bairro_2")
-        self.txt_bairro_2.setGeometry(QRect(130, 220, 181, 51))
+        self.txt_bairro_2.setGeometry(QRect(80, 220, 181, 51))
         self.txt_bairro_2.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -367,7 +368,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.label_10 = QLabel(frm_Cadastro)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setGeometry(QRect(0, 330, 681, 41))
+        self.label_10.setGeometry(QRect(0, 360, 681, 41))
         self.label_10.setStyleSheet(u"QLabel {\n"
 "    color: #FFFFFF;\n"
 "    font-size: 26px;\n"
@@ -390,7 +391,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.txt_numero = QLineEdit(frm_Cadastro)
         self.txt_numero.setObjectName(u"txt_numero")
-        self.txt_numero.setGeometry(QRect(510, 150, 101, 51))
+        self.txt_numero.setGeometry(QRect(90, 290, 61, 51))
         self.txt_numero.setStyleSheet(u"QLineEdit {\n"
 "    background-color: #FFFFFF;  \n"
 "    color: #1E1E1E;             \n"
@@ -402,7 +403,7 @@ class Ui_frm_Cadastro(object):
 "")
         self.groupBox_3 = QGroupBox(frm_Cadastro)
         self.groupBox_3.setObjectName(u"groupBox_3")
-        self.groupBox_3.setGeometry(QRect(10, 470, 251, 81))
+        self.groupBox_3.setGeometry(QRect(10, 500, 251, 81))
         self.groupBox_3.setStyleSheet(u"QGroupBox {\n"
 "    border: 2px solid #4DA8DA;\n"
 "    border-radius: 8px;\n"
@@ -469,6 +470,46 @@ class Ui_frm_Cadastro(object):
 "    border: 1px solid #3B82F6;\n"
 "}\n"
 "")
+        self.btn_att = QPushButton(frm_Cadastro)
+        self.btn_att.setObjectName(u"btn_att")
+        self.btn_att.setGeometry(QRect(510, 90, 31, 31))
+        self.btn_att.setStyleSheet(u"QPushButton {\n"
+"	 background-image: url(:/atualizar/atualizar (1).png);\n"
+"    background-repeat: no-repeat;\n"
+"    background-position: center;\n"
+"    padding: 6px 10px;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #C7D2FE;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #32CD32;\n"
+"}")
+        self.txt_complemento = QLineEdit(frm_Cadastro)
+        self.txt_complemento.setObjectName(u"txt_complemento")
+        self.txt_complemento.setGeometry(QRect(300, 290, 61, 51))
+        self.txt_complemento.setStyleSheet(u"QLineEdit {\n"
+"    background-color: #FFFFFF;  \n"
+"    color: #1E1E1E;             \n"
+"    font-size: 16px;\n"
+"    padding: 6px 10px;\n"
+"    border: 1px solid #CCCCCC;\n"
+"    border-radius: 6px;\n"
+"}\n"
+"")
+        self.lbl_complemento2 = QLabel(frm_Cadastro)
+        self.lbl_complemento2.setObjectName(u"lbl_complemento2")
+        self.lbl_complemento2.setGeometry(QRect(170, 300, 131, 41))
+        self.lbl_complemento2.setStyleSheet(u"QLabel {\n"
+"    color: #FFFFFF;\n"
+"    font-size: 18px;\n"
+"    font-weight: 500;\n"
+"    background: transparent;\n"
+"    qproperty-alignment: 'AlignCenter';\n"
+"}\n"
+"")
 
         self.retranslateUi(frm_Cadastro)
 
@@ -487,7 +528,7 @@ class Ui_frm_Cadastro(object):
         self.btn_continuar.setText(QCoreApplication.translate("frm_Cadastro", u"Cadastrar Moradores", None))
         self.lbl_bairro_2.setText(QCoreApplication.translate("frm_Cadastro", u"Bairro:", None))
         self.label_7.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00famero total de moradores na resid\u00eancia:", None))
-        self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas - latitude e longitude):", None))
+        self.lbl_coordernadas_2.setText(QCoreApplication.translate("frm_Cadastro", u"Coordenadas:", None))
         self.label_8.setText(QCoreApplication.translate("frm_Cadastro", u"Se sim, quantas crian\u00e7as?", None))
         self.groupBox.setTitle(QCoreApplication.translate("frm_Cadastro", u"A resid\u00eancia est\u00e1 habitada?", None))
         self.radio_sim.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
@@ -500,5 +541,7 @@ class Ui_frm_Cadastro(object):
         self.groupBox_3.setTitle(QCoreApplication.translate("frm_Cadastro", u"H\u00e1 crian\u00e7as na resid\u00eancia?", None))
         self.radio_sim1_2.setText(QCoreApplication.translate("frm_Cadastro", u"Sim", None))
         self.radio_nao2_2.setText(QCoreApplication.translate("frm_Cadastro", u"N\u00e3o", None))
+        self.btn_att.setText("")
+        self.lbl_complemento2.setText(QCoreApplication.translate("frm_Cadastro", u"Complemento:", None))
     # retranslateUi
 

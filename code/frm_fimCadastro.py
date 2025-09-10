@@ -493,7 +493,7 @@ class Ui_frm_fimCadastro(object):
         query = """
         INSERT INTO cadastroGeral (
                 Id, Coordenadas, CoordenadasM, Nome, Idade, Gênero, Telefone, `E-mail`,
-                Logradouro, `Número`, Bairro, Habitada, `Número-Moradores`, Crianças, `Quantidade-Crianças`,
+                Logradouro, `Número`, `Complemento`, Bairro, Habitada, `Número-Moradores`, Crianças, `Quantidade-Crianças`,
                 Mobilidade, Quantidade, `Tipo(s)`, Internet, Televisão, Rádio
         )
         SELECT 
@@ -507,6 +507,7 @@ class Ui_frm_fimCadastro(object):
                 m.`E-mail`,
                 r.Logradouro,
                 r.`Número`,
+                r.`Complemento`,
                 r.Bairro,
                 r.Habitada,
                 r.`Número-Moradores`,

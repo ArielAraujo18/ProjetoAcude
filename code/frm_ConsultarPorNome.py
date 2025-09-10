@@ -275,7 +275,7 @@ class Ui_frm_ConsultarPorNome(object):
 
         df = pd.DataFrame(
             myresult,
-            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
+            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Complemento", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
         )
         self.all_data = df
 
@@ -311,12 +311,36 @@ class Ui_frm_ConsultarPorNome(object):
         mycursor = mydb.cursor()
 
         nomeConsulta = self.txt_nomeMorador.text()
-        consultaSQL = "SELECT * FROM cadastroGeral WHERE nome LIKE %s"
-        mycursor.execute(consultaSQL, ('%' + nomeConsulta + '%',))
+        consultaSQL = """SELECT * FROM cadastroGeral 
+WHERE 
+    Id LIKE %s OR
+    Coordenadas LIKE %s OR
+    CoordenadasM LIKE %s OR
+    Nome LIKE %s OR
+    Idade LIKE %s OR
+    Gênero LIKE %s OR
+    Telefone LIKE %s OR
+    `E-mail` LIKE %s OR
+    Logradouro LIKE %s OR
+    Número LIKE %s OR
+    Complemento LIKE %s OR
+    Bairro LIKE %s OR
+    Habitada LIKE %s OR
+    `Número-Moradores` LIKE %s OR
+    Crianças LIKE %s OR
+    `Quantidade-Crianças` LIKE %s OR
+    Mobilidade LIKE %s OR
+    Quantidade LIKE %s OR
+    `Tipo(s)` LIKE %s OR
+    Internet LIKE %s OR
+    Televisão LIKE %s OR
+    Rádio LIKE %s"""
+        valores = tuple('%' + nomeConsulta + '%' for _ in range(22))  # repete para cada coluna
+        mycursor.execute(consultaSQL, valores)
 
         myresult = mycursor.fetchall()
 
-        df = pd.DataFrame(myresult, columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", "Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"])
+        df = pd.DataFrame(myresult, columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Complemento", "Bairro", "Habitada", "Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"])
         self.all_data = df
 
         numRows = len(self.all_data.index)
@@ -420,6 +444,7 @@ class Ui_frm_ConsultarPorNome(object):
         self.tabela()
         self.btn_pesquisar.clicked.connect(self.pesquisarPorNome)
         self.btn_consultar.clicked.connect(self.visualizar)
+        self.pesquisarPorNome()
 
 if __name__ == "__main__":
     app = QApplication([])

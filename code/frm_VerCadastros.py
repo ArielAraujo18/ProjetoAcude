@@ -250,7 +250,7 @@ class Ui_frm_VerCadastros(object):
 
         df = pd.DataFrame(
             myresult,
-            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
+            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Complemento", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
         )
         self.all_data = df
 

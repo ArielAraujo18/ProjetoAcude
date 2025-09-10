@@ -802,7 +802,7 @@ QRadioButton::indicator:checked {
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
-	 background-image: url(:/atualizar/Imagens/atualizar (1).png);
+	 background-image: url(:/atualizar/atualizar (1).png);
     background-repeat: no-repeat;
     background-position: center;
     padding: 6px 10px;
@@ -866,7 +866,7 @@ QPushButton:pressed {
   </widget>
  </widget>
  <resources>
-  <include location="../att.qrc"/>
+  <include location="../Imagens/att.qrc"/>
  </resources>
  <connections/>
 </ui>
