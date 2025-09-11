@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'frm_ConsultarPorNome.ui'
+##
+## Created by: Qt User Interface Compiler version 6.8.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -7,21 +17,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QHeaderView, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QTableWidget,
-    QTableWidgetItem, QWidget, QMessageBox)
-import pesquisar
-import consultar
-
-import controle
-import pandas as pd
-import pymysql
-import requests
-import json
+    QTableWidgetItem, QWidget)
+import pesquisar_rc
+import consultar_rc
 
 class Ui_frm_ConsultarPorNome(object):
     def setupUi(self, frm_ConsultarPorNome):
         if not frm_ConsultarPorNome.objectName():
             frm_ConsultarPorNome.setObjectName(u"frm_ConsultarPorNome")
-        frm_ConsultarPorNome.setFixedSize(662, 582)
+        frm_ConsultarPorNome.resize(662, 582)
         frm_ConsultarPorNome.setStyleSheet(u"QWidget{\n"
 "	background: #0033A0;\n"
 "}")
@@ -103,7 +107,6 @@ class Ui_frm_ConsultarPorNome(object):
 "    font-size: 14px; \n"
 "    background-color: #ffffff;\n"
 "    transition: all 0.3s ease;\n"
-"    color: #000000; \n"
 "}\n"
 "\n"
 "QLineEdit:hover {\n"
@@ -391,118 +394,6 @@ class Ui_frm_ConsultarPorNome(object):
         QMetaObject.connectSlotsByName(frm_ConsultarPorNome)
     # setupUi
 
-    def tabela(self):
-        mydb = pymysql.connect(
-            host=controle.host,
-            user=controle.user,
-            password=controle.password,
-            database=controle.database,
-        )
-
-        mycursor = mydb.cursor()
-
-        querySQL = "SELECT * FROM cadastroGeral"
-
-        mycursor.execute(querySQL)
-        myresult = mycursor.fetchall()
-
-        df = pd.DataFrame(
-            myresult,
-            columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Complemento", "Bairro", "Habitada", " Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"]   
-        )
-        self.all_data = df
-
-        numRows, numCols = self.all_data.shape
-        self.tableWidget.setRowCount(numRows)
-        self.tableWidget.setColumnCount(numCols)
-        self.tableWidget.setHorizontalHeaderLabels(self.all_data.columns)
-
-        for i, row in enumerate(self.all_data.itertuples(index=False)):
-            for j, value in enumerate(row):
-                self.tableWidget.setItem(i,j, QTableWidgetItem(str(value)))
-        
-        self.tableWidget.resizeColumnsToContents()
-        self.tableWidget.resizeRowsToContents()
-
-        mycursor.close()
-        mydb.close()
-
-    def pesquisarPorNome(self):
-        self.host = controle.host
-        self.user = controle.user
-        self.password = controle.password
-        self.database = controle.database 
-        print('Conectando...')
-        mydb = pymysql.connect(
-                host = controle.host,
-                user = controle.user,
-                password = controle.password,
-                database = controle.database
-        )
-        print('Conexão bem-sucedida!')
-
-        mycursor = mydb.cursor()
-
-        coluna = self.comboBox.currentText()
-        valor = self.txt_nomeMorador.text()
-        consultaSQL = f"SELECT * FROM cadastroGeral WHERE `{coluna}` LIKE %s"
-        mycursor.execute(consultaSQL, ('%' + valor + '%',))
-
-        myresult = mycursor.fetchall()
-
-        df = pd.DataFrame(myresult, columns=["Id", "Coordenadas", "CoordenadasM", "Nome", "Idade", "Gênero", "Telefone", "E-mail", "Logradouro", "Número", "Complemento", "Bairro", "Habitada", "Número-Moradores", "Crianças", "Quantidade-Crianças", "Mobilidade", "Quantidade", "Tipo(s)", "Internet", "Televisão", "Rádio"])
-        self.all_data = df
-
-        numRows = len(self.all_data.index)
-        numCols = len(self.all_data.columns)
-        self.tableWidget.setColumnCount(numCols)
-        self.tableWidget.setRowCount(numRows)
-        self.tableWidget.setHorizontalHeaderLabels(self.all_data.columns)
-
-        for i in range(numRows):
-                for j in range(numCols):
-                        self.tableWidget.setItem(i, j, QTableWidgetItem(str(self.all_data.iat[i, j])))
-
-        self.tableWidget.resizeColumnsToContents()
-        self.tableWidget.resizeRowsToContents()
-
-        mycursor.close()
-    
-    def visualizar(self):
-        line = self.tableWidget.currentRow()
-
-        if line == -1:
-            msg = QMessageBox()
-            msg.setWindowTitle("ERRO!")
-            msg.setText("Por favor, selecione um morador para visualizar.")
-            msg.setIcon(QMessageBox.Warning)
-            msg.setStandardButtons(QMessageBox.Ok)
-            msg.exec()
-            return
-
-        col_coordenadas = 2 
-        item = self.tableWidget.item(line, col_coordenadas)
-
-        if item:
-            coords_text = item.text()
-            print("Coordenadas lidas:", coords_text)
-
-
-            valores = [float(v.strip()) for v in coords_text.split(",")]
-
-            pontos = []
-            for i in range(0, len(valores), 2):
-                pontos.append({"lat": valores[i], "lng": valores[i+1]})
-
-            response = requests.post(
-                "http://localhost:5001/receber-coordenadas",
-                json={"pontos": pontos}
-            )
-            print("Pontos enviados para o Flask:", pontos)
-            print("Resposta do Flask:", response.json())
-        else:
-            print('Erro')
-
     def retranslateUi(self, frm_ConsultarPorNome):
         frm_ConsultarPorNome.setWindowTitle(QCoreApplication.translate("frm_ConsultarPorNome", u"Form", None))
         self.btn_consultar.setText("")
@@ -573,15 +464,4 @@ class Ui_frm_ConsultarPorNome(object):
         self.comboBox.setItemText(21, QCoreApplication.translate("frm_ConsultarPorNome", u"R\u00e1dio", None))
 
     # retranslateUi
-        self.tabela()
-        self.btn_pesquisar.clicked.connect(self.pesquisarPorNome)
-        self.btn_consultar.clicked.connect(self.visualizar)
-        self.pesquisarPorNome()
 
-if __name__ == "__main__":
-    app = QApplication([])
-    frm_ConsultarPorNome = QWidget()
-    ui = Ui_frm_ConsultarPorNome()
-    ui.setupUi(frm_ConsultarPorNome)
-    frm_ConsultarPorNome.show()
-    app.exec()  
