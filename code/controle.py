@@ -1,5 +1,5 @@
 host = 'localhost'
-user = 'Ariel'
+user = 'root'
 password = 'IRani18@#'
 database = 'SegurancaAcude'
 coordenadasF = 'vazio'

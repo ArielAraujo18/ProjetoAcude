@@ -8,7 +8,6 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QLabel,
     QLineEdit, QPushButton, QRadioButton, QSizePolicy,
     QWidget, QMessageBox)
-
 import pymysql
 import pandas
 import controle
@@ -492,12 +491,11 @@ class Ui_frm_fimCadastro(object):
 
         query = """
         INSERT INTO cadastroGeral (
-                Id, Coordenadas, CoordenadasM, Nome, Idade, Gênero, Telefone, `E-mail`,
+                Coordenadas, CoordenadasM, Nome, Idade, Gênero, Telefone, `E-mail`,
                 Logradouro, `Número`, `Complemento`, Bairro, Habitada, `Número-Moradores`, Crianças, `Quantidade-Crianças`,
                 Mobilidade, Quantidade, `Tipo(s)`, Internet, Televisão, Rádio
         )
         SELECT 
-                m.Id,
                 m.Coordenadas,
                 m.CoordenadasM,
                 m.Nome,
@@ -567,7 +565,7 @@ class Ui_frm_fimCadastro(object):
         self.radio_sim_5.setText(QCoreApplication.translate("frm_fimCadastro", u"Sim", None))
         self.radio_nao_5.setText(QCoreApplication.translate("frm_fimCadastro", u"N\u00e3o", None))
     # retranslateUi
-        
+
         self.btn_continuar.clicked.connect(self.registroMobilidade)
         self.btn_continuar.clicked.connect(self.cadGeral)
         self.btn_continuar.clicked.connect(self.limparBd)
@@ -578,4 +576,4 @@ if __name__ == "__main__":
     ui = Ui_frm_fimCadastro()
     ui.setupUi(frm_fimCadastro)
     frm_fimCadastro.show()
-    app.exec()  
+    app.exec()

@@ -17,7 +17,8 @@ async function iniciarMap() {
         mapId: "YOUR_MAP_ID"
     });
 
-    marcarCasasDoBD(AdvancedMarkerElement);
+    await marcarCasasDoBD(AdvancedMarkerElement);
+    ativarDuploCliqueNasCasas();
 
     setInterval(() => {
         marcarCasasDoBD(AdvancedMarkerElement);
@@ -118,6 +119,7 @@ function enviarPontosAoFlask(pontos) {
         alert("Erro ao enviar pontos.");
     });
 }
+
 async function carregarCoordenadas() {
     try {
         const res = await fetch("http://localhost:5001/receber-coordenadas");
@@ -154,6 +156,7 @@ async function carregarCoordenadas() {
         console.error("Erro ao carregar coordenadas:", err);
     }
 }
+
 async function atualizarCoordenadas() {
     try {
         const res = await fetch("http://localhost:5001/receber-coordenadas");
@@ -199,6 +202,7 @@ async function atualizarCoordenadas() {
         console.error("Erro ao atualizar coordenadas:", err);
     }
 }
+
 async function marcarCasas() {
     try {
         const res = await fetch("http://localhost:5001/receber-coordenadas");
@@ -230,6 +234,7 @@ async function marcarCasas() {
         console.error("Erro ao marcar casas:", err);
     }
 }
+
 async function marcarCasasDoBD(AdvancedMarkerElement) {
     try {
         const res = await fetch("http://localhost:5002/casas");
@@ -291,4 +296,41 @@ async function marcarCasasDoBD(AdvancedMarkerElement) {
     } catch (err) {
         console.error("Erro ao desenhar casas:", err);
     }
+}
+
+function ativarDuploCliqueNasCasas() {
+    if (!window.poligonos || window.poligonos.length === 0) return;
+
+    window.poligonos.forEach((poligono, idx) => {
+        google.maps.event.addListener(poligono, "dblclick", async () => {
+            try {
+                // Pega todas as casas do backend
+                const res = await fetch("http://localhost:5003/casas");
+                const casas = await res.json();
+
+                // Associa polígono à casa pelo índice
+                const casa = casas[idx]; // ou use ID se tiver polígono.id_casa
+
+                if (!casa) {
+                    alert("Casa não encontrada!");
+                    return;
+                }
+
+                // Mensagem sem coordenadas
+                const msg = 
+                    `🏠 Casa: ${casa.Nome}\n` +
+                    `Telefone: ${casa.Telefone}\n` +
+                    `Logradouro: ${casa.Logradouro}\n` +
+                    `Bairro: ${casa.Bairro}`;
+
+                alert(msg);
+
+            } catch (err) {
+                console.error("Erro ao buscar dados da casa:", err);
+                alert("Erro ao buscar dados da casa.");
+            }
+        });
+    });
+
+    console.log("Eventos de duplo clique ativados!");
 }
