@@ -38,4 +38,4 @@ app.get("/casas", async (req, res) => {
   }
 });
 
-app.listen(5002, () => console.log("Servidor casas rodando na porta 5002 🚀"));
+app.listen(5002, () => console.log("Servidor node rodando na porta 5002 "));

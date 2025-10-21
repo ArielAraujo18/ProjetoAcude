@@ -11,17 +11,17 @@ root.configure(background='#FF0000')
 def botao_se_mexendo(e):
     distancia_x = abs(e.x - button_nao.winfo_x())
     distancia_y = abs(e.y - button_nao.winfo_y())
-    if distancia_x < 100 and distancia_y < 80:
+    if distancia_x < 300 and distancia_y < 100:
         x = random.randint(0, root.winfo_width() - button_nao.winfo_width())
         y = random.randint(0, root.winfo_height() - button_nao.winfo_height())
         button_nao.place(x=x, y=y)
 
 def aceitou():
-    messagebox.showinfo("Eu te amops t", "Casaremos em breve")
+    messagebox.showinfo("<3", "Em breve casaremos <3")
     webbrowser.open("https://www.youtube.com/watch?v=ICS6uKC93w0")
 
 def denied():
-    messagebox.showinfo("", "Ops, não deu certo!")
+    messagebox.showinfo("")
 
 margem = tk.Canvas(root, width=500, bg='#FF0000', height=100, bd=0, highlightthickness=0, relief='ridge')
 margem.pack()
