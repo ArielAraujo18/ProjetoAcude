@@ -127,7 +127,6 @@ class Ui_frm_Principal(object):
 
         QMetaObject.connectSlotsByName(frm_Principal)
     # setupUi
-
     def register(self):
 
         if not hasattr(self, 'frm_Cadastro') or self.frm_Cadastro is None or not self.frm_Cadastro.isVisible():
