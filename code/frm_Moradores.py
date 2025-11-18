@@ -12,7 +12,6 @@ import pandas as pd
 import controle
 import pymysql
 
-
 class Ui_frm_Moradores(object):
     def setupUi(self, frm_Moradores):
         if not frm_Moradores.objectName():
