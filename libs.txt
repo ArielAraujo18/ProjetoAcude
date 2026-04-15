@@ -1,0 +1,12 @@
+pip install PySide6
+pip install PyMySQL
+pip install pandas
+pip install Flask
+pip install flask-cors
+
+//RODAR SERVIDORES
+python -m http.server 8000
+python3 servidorC.py
+python3 servidorF.py
+python3 servidorG.py
+node server.js
