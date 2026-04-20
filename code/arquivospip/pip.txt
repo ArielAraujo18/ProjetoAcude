@@ -1,0 +1,7 @@
+pip install Pyside6
+pip install Pandas
+pip install PyMySQL
+pip install requests
+pip install Flask
+pip install flask-cors
+pip install utm 
